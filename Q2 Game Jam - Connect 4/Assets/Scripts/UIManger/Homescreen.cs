@@ -14,6 +14,8 @@ public class Homescreen : MonoBehaviour
         UIManager.instUIM.SwitchScreen(ScreenType.Gameplay);
         P2.SetActive(false);
         UIManager.instUIM.levelSelectorOff();
+        InputManager.IMinst.gamestart();
+        //InputManager.IMinst.callplayer(plyenum.Player1);
     }
 
     public void PvPGame()
@@ -21,6 +23,9 @@ public class Homescreen : MonoBehaviour
         UIManager.instUIM.SwitchScreen(ScreenType.Gameplay);
         P2.SetActive(true);
         UIManager.instUIM.levelSelectorOff();
+
+        InputManager.IMinst.gamestart();
+       // InputManager.IMinst.callplayer(plyenum.Player1);
     }
 
     public void OpenLvlSelect()
@@ -43,6 +48,11 @@ public class Homescreen : MonoBehaviour
     {
         MuteBTN.SetActive(true);
         UnMuteBTN.SetActive(false);
+    }
+
+    public void Outside()
+    {
+        UIManager.instUIM.levelSelectorOff();
     }
 
 }

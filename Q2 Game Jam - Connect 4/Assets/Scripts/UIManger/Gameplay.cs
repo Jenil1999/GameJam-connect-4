@@ -7,5 +7,6 @@ public class Gameplay : MonoBehaviour
     public void CloseBTN()
     {
         UIManager.instUIM.SwitchScreen(ScreenType.HomeScreen);
+        InputManager.IMinst.gameend();
     }
 }

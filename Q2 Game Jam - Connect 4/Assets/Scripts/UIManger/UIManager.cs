@@ -22,7 +22,6 @@ public class UIManager : MonoBehaviour
     }
     public void SwitchScreen(ScreenType screenType)
     {
-        Debug.Log("switch screen");
         currentScreen.canvas.enabled = false;
         foreach (UIScreen onScreen in screen)
         {
