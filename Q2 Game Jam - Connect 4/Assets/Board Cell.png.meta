@@ -1,0 +1,1083 @@
+fileFormatVersion: 2
+guid: aeee0ce38dbea41cabe900c5826a252b
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Board Cell_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 350.83334
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07638e55322c64817a9b7713644ef014
+      internalID: 436710742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_1
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 350.83334
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e03ba729cc65c407bb5162da128168a4
+      internalID: -555147692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_2
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 350.83334
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3891ac594ec24e0aaef3f8058b3ff92
+      internalID: -614347075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_3
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 350.83334
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d468fec0dcb0e4e47b4cc2d4aef8644c
+      internalID: 154623981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_4
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 350.83334
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f17896f7a3784066a473dae4ce0e5fe
+      internalID: 1036332636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_5
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 350.83334
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3fc14ccd9f8f458a8241085cbac0cdc
+      internalID: 1863324556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_6
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 350.83334
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 386b95c19b748482c9a21c544e244d8b
+      internalID: 1190689078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 280.83334
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93fab9b0194534a95911ca135631ac8d
+      internalID: 809173720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_8
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 280.83334
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe38bac0095ba4465b0c4fe8804c8bcc
+      internalID: -1558278606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_9
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 280.83334
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8f701dc85f834da1972d23d009460c0
+      internalID: -427269209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_10
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 280.83334
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e791c102b84c74cbd832d3968ad8ac6e
+      internalID: -1004158052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_11
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 280.83334
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8c3341c0d68b45bcb9143dbdf8829f6
+      internalID: -1696552425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_12
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 280.83334
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09a2e57a99b574982be2a16758d6c569
+      internalID: 816523358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_13
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 280.83334
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aaaf984e49bbb41efaf275d093f9b5a8
+      internalID: -1029444764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 210.83334
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcdacd139a88f4ee59d6eb0c4b9d1238
+      internalID: 1619408971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_15
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 210.83334
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25a823a6d9c354b04a4624a30e5baa2a
+      internalID: 2052524483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_16
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 210.83334
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02a83a50c97c541d7871e8889dc0f2ae
+      internalID: 758626646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_17
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 210.83334
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e2b64fb453b94d468b1d308c13971b0
+      internalID: -1260738690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_18
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 210.83334
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43d984c39e2174d9fa83a567a2956301
+      internalID: -1821585372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_19
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 210.83334
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26fa6151c2ae44f23992b921507180fd
+      internalID: -197519764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_20
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 210.83334
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3da78bec405941cb8fa298e5e34ae2c
+      internalID: -789403267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 140.83334
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6489c540c2514fc58cb158459c27620
+      internalID: -554797851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_22
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 140.83334
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e561f5235111f4e50a8384cca0dceb7f
+      internalID: 1129772577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_23
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 140.83334
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 401579bce23c04735af910ac6115bff9
+      internalID: 1282210589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_24
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 140.83334
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0cba33faa49b496287d29b3fccf3330
+      internalID: -764630226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_25
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 140.83334
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5050cd8051cc4e1987894190545f2de
+      internalID: -1942359301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_26
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 140.83334
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38976b7078a704b2eb9fb260fd63b85f
+      internalID: 325724889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_27
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 140.83334
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2049800a0ad64dbf836b2db966b2501
+      internalID: -1324954732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 70.833336
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3210f069594d42b090f0fe33f289218
+      internalID: 592021731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_29
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 70.833336
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80267ba0aa84042b5b4e3058ffea59f0
+      internalID: 915936476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_30
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 70.833336
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8410f428d2e7e4f829c3e8ff8b0f6659
+      internalID: 1836809103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_31
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 70.833336
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5906ca29ea2c4214b123a2d7761d207
+      internalID: -1429791947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_32
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 70.833336
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74debf62c2fae4c8fb8fbb37e34f1f00
+      internalID: 33251162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_33
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 70.833336
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f04e9d2fe47343afbbbf43888b9566f
+      internalID: -846956942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_34
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 70.833336
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63538bfe57a0d48178887dd92a348734
+      internalID: 1610368010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_35
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0.8333359
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4adeb320e4f0f4ad9b777f41004bfd49
+      internalID: -1307929745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_36
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 0.8333359
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 671f07410eb254375936dc733f5a527d
+      internalID: -533841020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_37
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 0.8333359
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20cc3b86d02fa4b9b9ec0967b6ac1bd8
+      internalID: 2096713243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_38
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 0.8333359
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1cadd3d50fe994e3da425a3ce480cbc2
+      internalID: 608843626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_39
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 0.8333359
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 023e7f1ae1fb64eb181bcb0813325044
+      internalID: 297832266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_40
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 0.8333359
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37289fffa06ef4bfcad45c4d8963c984
+      internalID: 1741876361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Board Cell_41
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 0.8333359
+        width: 70.14286
+        height: 70.166664
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b81817f82a0340ca9dd2a360c2927ec
+      internalID: -1392180973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Board Cell_0: 436710742
+      Board Cell_1: -555147692
+      Board Cell_10: -1004158052
+      Board Cell_11: -1696552425
+      Board Cell_12: 816523358
+      Board Cell_13: -1029444764
+      Board Cell_14: 1619408971
+      Board Cell_15: 2052524483
+      Board Cell_16: 758626646
+      Board Cell_17: -1260738690
+      Board Cell_18: -1821585372
+      Board Cell_19: -197519764
+      Board Cell_2: -614347075
+      Board Cell_20: -789403267
+      Board Cell_21: -554797851
+      Board Cell_22: 1129772577
+      Board Cell_23: 1282210589
+      Board Cell_24: -764630226
+      Board Cell_25: -1942359301
+      Board Cell_26: 325724889
+      Board Cell_27: -1324954732
+      Board Cell_28: 592021731
+      Board Cell_29: 915936476
+      Board Cell_3: 154623981
+      Board Cell_30: 1836809103
+      Board Cell_31: -1429791947
+      Board Cell_32: 33251162
+      Board Cell_33: -846956942
+      Board Cell_34: 1610368010
+      Board Cell_35: -1307929745
+      Board Cell_36: -533841020
+      Board Cell_37: 2096713243
+      Board Cell_38: 608843626
+      Board Cell_39: 297832266
+      Board Cell_4: 1036332636
+      Board Cell_40: 1741876361
+      Board Cell_41: -1392180973
+      Board Cell_5: 1863324556
+      Board Cell_6: 1190689078
+      Board Cell_7: 809173720
+      Board Cell_8: -1558278606
+      Board Cell_9: -427269209
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
