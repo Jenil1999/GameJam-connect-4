@@ -8,7 +8,8 @@ public enum plyenum
     Player1,
     Player2,
     Player3,
-    Player4
+    Player4,
+    playerBOT
 }
 
 

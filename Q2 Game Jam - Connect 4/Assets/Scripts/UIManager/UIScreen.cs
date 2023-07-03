@@ -13,8 +13,7 @@ public enum ScreenType
 public class UIScreen : MonoBehaviour
 {
     public ScreenType screenType;
-    [HideInInspector]
-    public Canvas canvas;
+    [HideInInspector] public Canvas canvas;
 
     private void Awake()
     {

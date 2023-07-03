@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gameplay : MonoBehaviour
+public class Gameplay : UIScreen
 {
     public void CloseBTN()
     {
         UIManager.instUIM.SwitchScreen(ScreenType.HomeScreen);
-        InputManager.IMinst.gameend();
+        GameManager.GMinst.gameend();
+        GameManager.GMinst.Reset();
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Homescreen : MonoBehaviour
+public class Homescreen : UIScreen
 {
     public GameObject P2;
     public GameObject MuteBTN;
@@ -14,8 +14,8 @@ public class Homescreen : MonoBehaviour
         UIManager.instUIM.SwitchScreen(ScreenType.Gameplay);
         P2.SetActive(false);
         UIManager.instUIM.levelSelectorOff();
-        InputManager.IMinst.gamestart();
-        //InputManager.IMinst.callplayer(plyenum.Player1);
+        GameManager.GMinst.gamebotstart();
+        GridManager.gridMinst.Reset();
     }
 
     public void PvPGame()
@@ -24,8 +24,8 @@ public class Homescreen : MonoBehaviour
         P2.SetActive(true);
         UIManager.instUIM.levelSelectorOff();
 
-        InputManager.IMinst.gamestart();
-       // InputManager.IMinst.callplayer(plyenum.Player1);
+        GameManager.GMinst.gamestart();
+        GridManager.gridMinst.Reset();
     }
 
     public void OpenLvlSelect()

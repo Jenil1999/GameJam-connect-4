@@ -2,17 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum cellType
+{
+    none,red,yellow
+}
+
+
+
 public class Cell : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public SpriteRenderer child;
+    public cellType cellType;
+    public Color childcolorRED;
+    public Color childcolorYellow;
+    public Color reset;
+
+    private void Start()
     {
-        
+        cellType = cellType.none;
+    }
+    public void changeRED()
+    {
+        child.color = childcolorRED;
+        cellType = cellType.red;
+       // Debug.Log(this.gameObject.name + "of type : " + cellType);
+    }
+    public void changeYellow()
+    {
+        child.color = childcolorYellow;
+        cellType = cellType.yellow;
+        //Debug.Log(this.gameObject.name + "of type : " + cellType);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Reset()
     {
-        
+        child.color = reset;
+        cellType = cellType.none;
+        //Debug.Log(this.gameObject.name + "of type : " + cellType);
     }
+   
 }
