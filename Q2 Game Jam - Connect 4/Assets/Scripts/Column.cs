@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CellChild : MonoBehaviour
+public class Column : MonoBehaviour
 {
-    
+    public int colNUm = 3;
+
+
+
 }

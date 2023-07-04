@@ -8,6 +8,5 @@ public class Gameplay : UIScreen
     {
         UIManager.instUIM.SwitchScreen(ScreenType.HomeScreen);
         GameManager.GMinst.gameend();
-        GameManager.GMinst.Reset();
     }
 }
