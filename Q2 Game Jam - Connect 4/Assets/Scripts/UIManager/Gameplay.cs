@@ -9,4 +9,14 @@ public class Gameplay : UIScreen
         UIManager.instUIM.SwitchScreen(ScreenType.HomeScreen);
         GameManager.GMinst.gameend();
     }
+
+    public void Playagain()
+    {
+        UIManager.instUIM.winOff();
+        GridManager.gridMinst.Reset();
+    }
+
+
+
+
 }

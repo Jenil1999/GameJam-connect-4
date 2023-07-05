@@ -47,7 +47,7 @@ public class GridManager : MonoBehaviour
 
     public void Reset()
     {
-        coinsToWin = 4;
+        //coinsToWin = 4;
         foreach (Cell cell in cells)
         {
             cell.GetComponent<Cell>().Reset();
@@ -128,34 +128,70 @@ public class GridManager : MonoBehaviour
             for (int row = 0; row <= Row - 1; row++)
             {
                 //Debug.Log(cells[row, col]);
-                if (cells[row, col].cellType != cellType.none)
+                //if (cells[row, col].cellType != cellType.none)
+                //{
+
+
+
+
+                if (cells[row, col].cellType == cellType.red)
                 {
-
-                    if (cells[row, col].cellType == cellType.red)
+                    // Horizontal Forward
+                    if (col + 1 <= 6)
                     {
-
-
-                        if (row + 1 > 5 || row - 1 < 0 || col + 1 > 6 || col - 1 < 0)
+                        if (cells[row, col + 1].cellType == cellType.red)
                         {
-                            // Horizontal Forward
-                            if (cells[row, col + 1].cellType == cellType.red)
+                            coinsToWin = 3;
+                            for (int i = 1; i <= 3; i++)
                             {
-                                coinsToWin = 3;
-                                for (int i = 1; i <= 3; i++)
+                                if (col + i <= 6)
                                 {
-                                    if (row + i > 5 || row - i < 0 || col + i > 6 || col - i < 0)
+                                    if (cells[row, col + i].cellType == cellType.red)
                                     {
-                                        if (cells[row, col + i].cellType == cellType.red)
+
+                                        Debug.Log("Checking Horizontal Forward");
+                                        coinsToWin -= 1;
+                                        if (coinsToWin == 0)
                                         {
+                                            Debug.Log("Red wins : Horizontally Forward");
+                                            UIManager.instUIM.winOn();
+                                            
+                                        }
 
-                                            Debug.Log("Checking Horizontal Forward");
-                                            coinsToWin -= 1;
-                                            if (coinsToWin == 0)
-                                            {
-                                                Debug.Log("Red wins : Horizontally Forward");
-                                                //break;
-                                            }
+                                    }
+                                    else
+                                    {
+                                        break;
+                                    }
 
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    if (col - 1 >= 0)
+                    {
+                        //Horizontal Backward
+                        if (cells[row, col - 1].cellType == cellType.red)
+                        {
+                            coinsToWin = 3;
+                            for (int i = 1; i <= 3; i++)
+                            {
+                                if (col - i >= 0)
+                                {
+
+                                    if (cells[row, col - i].cellType == cellType.red)
+                                    {
+                                        Debug.Log("Checking Horizontal Backward");
+                                        coinsToWin -= 1;
+                                        if (coinsToWin == 0)
+                                        {
+                                            Debug.Log("Red wins : Horizontally Backward");
+                                            UIManager.instUIM.winOn();
                                         }
 
                                     }
@@ -164,50 +200,28 @@ public class GridManager : MonoBehaviour
                                         break;
                                     }
                                 }
-                            }
-                            else
-                            {
-
-                            }
-
-                            //Horizontal Backward
-                            if (cells[row, col - 1].cellType == cellType.red)
-                            {
-                                coinsToWin = 3;
-                                for (int i = 1; i <= 3; i++)
+                                else
                                 {
-                                    if (cells[row, col - i].cellType == cellType.red)
-                                    {
-                                        Debug.Log("Checking Horizontal Backward");
-                                        coinsToWin -= 1;
-                                        if (coinsToWin == 0)
-                                        {
-                                            Debug.Log("Red wins : Horizontally Backward");
-                                            // break;
-                                        }
-
-                                    }
-                                    else
-                                    {
-
-                                    }
-
+                                    break;
                                 }
 
                             }
-                            else
+
+                        }
+                    }
+
+
+
+                    //Vertical Downward
+                    if (row + 1 <= 5 )
+                    {
+                        if (cells[row + 1, col].cellType == cellType.red)
+                        {
+                            coinsToWin = 3;
+                            for (int i = 1; i <= 3; i++)
                             {
-
-                            }
-
-
-                            //Vertical Downward
-                            if (cells[row + 1, col].cellType == cellType.red)
-                            {
-                                coinsToWin = 3;
-                                for (int i = 1; i <= 3; i++)
+                                if (row + i <= 5)
                                 {
-
                                     if (cells[row + i, col].cellType == cellType.red)
                                     {
                                         Debug.Log("Checking Vertical downward");
@@ -215,31 +229,36 @@ public class GridManager : MonoBehaviour
                                         if (coinsToWin == 0)
                                         {
                                             Debug.Log("Red wins : Vertically Downward");
-                                            //break;
+                                            UIManager.instUIM.winOn();
                                         }
 
                                     }
                                     else
                                     {
-
+                                        break;
                                     }
-
+                                }
+                                else
+                                {
+                                    break;
                                 }
 
                             }
-                            else
+
+                        }
+                    }
+
+
+                    //Vertical Upward
+                    if (row - 1 >= 0 )
+                    {
+                        if (cells[row - 1, col].cellType == cellType.red)
+                        {
+                            coinsToWin = 3;
+                            for (int i = 1; i <= 3; i++)
                             {
-
-                            }
-
-
-                            //Vertical Upward
-                            if (cells[row - 1, col].cellType == cellType.red)
-                            {
-                                coinsToWin = 3;
-                                for (int i = 1; i <= 3; i++)
+                                if (row - i >= 0)
                                 {
-
                                     if (cells[row - i, col].cellType == cellType.red)
                                     {
                                         Debug.Log("Checking Vertical Upward");
@@ -247,29 +266,34 @@ public class GridManager : MonoBehaviour
                                         if (coinsToWin == 0)
                                         {
                                             Debug.Log("Red wins : Vertically Upward");
-                                            //break;
+                                            UIManager.instUIM.winOn();
                                         }
 
 
                                     }
                                     else
                                     {
-
+                                        break;
                                     }
                                 }
-                            }
-                            else
-                            {
-
-                            }
-
-                            //Diagonal(Left down - Right up)
-                            if (cells[row - 1, col + 1].cellType == cellType.red)
-                            {
-                                coinsToWin = 3;
-                                for (int i = 1; i <= 3; i++)
+                                else
                                 {
+                                    break;
+                                }
+                            }
+                        }
+                    }
 
+                    //Diagonal(Left down - Right up)
+                    if (row - 1 >= 0 && col + 1 <= 6 )
+                    {
+                        if (cells[row - 1, col + 1].cellType == cellType.red)
+                        {
+                            coinsToWin = 3;
+                            for (int i = 1; i <= 3; i++)
+                            {
+                                if (row - i >= 0 && col + i <= 6)
+                                {
                                     if (cells[row - i, col + i].cellType == cellType.red)
                                     {
                                         Debug.Log("Checking Diagonal(Left down - Right up)");
@@ -277,29 +301,34 @@ public class GridManager : MonoBehaviour
                                         if (coinsToWin == 0)
                                         {
                                             Debug.Log("Red wins : Diagonal(Left down - Right up)");
-                                            //break;
+                                            UIManager.instUIM.winOn();
                                         }
 
 
                                     }
                                     else
                                     {
-
+                                        break;
                                     }
                                 }
-                            }
-                            else
-                            {
-
-                            }
-
-                            //Diagonal(Right up - Left down)
-                            if (cells[row + 1, col - 1].cellType == cellType.red)
-                            {
-                                coinsToWin = 3;
-                                for (int i = 1; i <= 3; i++)
+                                else
                                 {
+                                    break;
+                                }
+                            }
+                        }
+                    }
 
+                    //Diagonal(Right up - Left down)
+                    if (row + 1 <= 5 && col - 1 >= 0)
+                    {
+                        if (cells[row + 1, col - 1].cellType == cellType.red)
+                        {
+                            coinsToWin = 3;
+                            for (int i = 1; i <= 3; i++)
+                            {
+                                if (row + i <= 5 && col - i >= 0)
+                                {
                                     if (cells[row + i, col - i].cellType == cellType.red)
                                     {
                                         Debug.Log("Checking Diagonal(Right up - Left down)");
@@ -307,29 +336,35 @@ public class GridManager : MonoBehaviour
                                         if (coinsToWin == 0)
                                         {
                                             Debug.Log("Red wins : Diagonal(Right up - Left down)");
-                                            //break;
+                                            UIManager.instUIM.winOn();
                                         }
 
                                     }
                                     else
                                     {
-
+                                        break;
                                     }
                                 }
-                            }
-                            else
-                            {
 
-                            }
-
-
-                            //Diagonal(Right down - Left up)
-                            if (cells[row - 1, col - 1].cellType == cellType.red)
-                            {
-                                coinsToWin = 3;
-                                for (int i = 1; i <= 3; i++)
+                                else
                                 {
+                                    break;
+                                }
+                            }
+                        }
+                    }
 
+
+                    //Diagonal(Right down - Left up)
+                    if (row - 1 >= 0 && col - 1 >= 0)
+                    {
+                        if (cells[row - 1, col - 1].cellType == cellType.red)
+                        {
+                            coinsToWin = 3;
+                            for (int i = 1; i <= 3; i++)
+                            {
+                                if (row - i >= 0 && col - i >= 0)
+                                {
                                     if (cells[row - i, col - i].cellType == cellType.red)
                                     {
                                         Debug.Log("Checking Diagonal(Right down - Left up)");
@@ -337,29 +372,34 @@ public class GridManager : MonoBehaviour
                                         if (coinsToWin == 0)
                                         {
                                             Debug.Log("Red wins : Diagonal(Right down - Left up)");
-                                            //break;
+                                            UIManager.instUIM.winOn();
                                         }
 
                                     }
                                     else
                                     {
-
+                                        break;
                                     }
                                 }
-
-                            }
-                            else
-                            {
-
-                            }
-
-                           // Diagonal(Left up - Right down)
-                            if (cells[row + 1, col + 1].cellType == cellType.red)
-                            {
-                                coinsToWin = 3;
-                                for (int i = 1; i <= 3; i++)
+                                else
                                 {
+                                    break;
+                                }
+                            }
 
+                        }
+                    }
+
+                    // Diagonal(Left up - Right down)
+                    if (row + 1 <= 5 && col + 1 <= 6 )
+                    {
+                        if (cells[row + 1, col + 1].cellType == cellType.red)
+                        {
+                            coinsToWin = 3;
+                            for (int i = 1; i <= 3; i++)
+                            {
+                                if (row + i <= 5 && col + i <= 6)
+                                {
                                     if (cells[row + i, col + i].cellType == cellType.red)
                                     {
                                         Debug.Log("Checking Diagonal(Left up - Right down)");
@@ -367,25 +407,27 @@ public class GridManager : MonoBehaviour
                                         if (coinsToWin == 0)
                                         {
                                             Debug.Log("Red wins : Diagonal(Left up - Right down");
-                                            //break;
+                                            UIManager.instUIM.winOn();
                                         }
 
                                     }
                                     else
                                     {
-
+                                        break;
                                     }
                                 }
+                                else
+                                {
+                                    break;
+                                }
                             }
-                            else
-                            {
-
-                            }
-
                         }
-
                     }
+
                 }
+
+                //}
+                //}
             }
         }
 
