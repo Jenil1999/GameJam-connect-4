@@ -80,7 +80,7 @@ public class GridManager : MonoBehaviour
                     if (cellT == cellType.yellow)
                         cells[i - 1, SCol].GetComponent<Cell>().changeYellow();
 
-
+                    Debug.Log(cells[i - 1, SCol].transform.position);
                     GameManager.GMinst.turnChange();
 
                     //if (i-1 == 0)
@@ -107,6 +107,8 @@ public class GridManager : MonoBehaviour
 
                     if (cellT == cellType.yellow)
                         cells[i, SCol].GetComponent<Cell>().changeYellow();
+
+                    Debug.Log(cells[i, SCol].transform.position);
                     GameManager.GMinst.turnChange();
                     break;
                 }
@@ -120,7 +122,627 @@ public class GridManager : MonoBehaviour
 
 
 
-    public void checkWin()
+    //public void checkWin()
+    //{
+
+    //    for (int col = 0; col <= column - 1; col++)
+    //    {
+    //        for (int row = 0; row <= Row - 1; row++)
+    //        {
+    //            //Debug.Log(cells[row, col]);
+    //            //if (cells[row, col].cellType != cellType.none)
+    //            //{
+
+
+
+
+    //            if (cells[row, col].cellType == cellType.red)
+    //            {
+    //                // Horizontal Forward
+    //                if (col + 1 <= 6)
+    //                {
+    //                    if (cells[row, col + 1].cellType == cellType.red)
+    //                    {
+    //                        coinsToWin = 3;
+    //                        for (int i = 1; i <= 3; i++)
+    //                        {
+    //                            if (col + i <= 6)
+    //                            {
+    //                                if (cells[row, col + i].cellType == cellType.red)
+    //                                {
+
+    //                                   // Debug.Log("Checking Red Horizontal Forward");
+    //                                    coinsToWin -= 1;
+    //                                    if (coinsToWin == 0)
+    //                                    {
+    //                                        Debug.Log(currentType+" wins : Horizontally Forward");
+    //                                        UIManager.instUIM.winOn();
+    //                                        GameManager.GMinst.updateWinText(0);
+    //                                    }
+
+    //                                }
+    //                                else
+    //                                {
+    //                                    break;
+    //                                }
+
+    //                            }
+    //                            else
+    //                            {
+    //                                break;
+    //                            }
+    //                        }
+    //                    }
+    //                }
+
+    //                if (col - 1 >= 0)
+    //                {
+    //                    //Horizontal Backward
+    //                    if (cells[row, col - 1].cellType == cellType.red)
+    //                    {
+    //                        coinsToWin = 3;
+    //                        for (int i = 1; i <= 3; i++)
+    //                        {
+    //                            if (col - i >= 0)
+    //                            {
+
+    //                                if (cells[row, col - i].cellType == cellType.red)
+    //                                {
+    //                                    //Debug.Log("Checking Red Horizontal Backward");
+    //                                    coinsToWin -= 1;
+    //                                    if (coinsToWin == 0)
+    //                                    {
+    //                                        Debug.Log(currentType+" wins : Horizontally Backward");
+    //                                        UIManager.instUIM.winOn();
+    //                                        GameManager.GMinst.updateWinText(0);
+    //                                    }
+
+    //                                }
+    //                                else
+    //                                {
+    //                                    break;
+    //                                }
+    //                            }
+    //                            else
+    //                            {
+    //                                break;
+    //                            }
+
+    //                        }
+
+    //                    }
+    //                }
+
+
+
+    //                //Vertical Downward
+    //                if (row + 1 <= 5 )
+    //                {
+    //                    if (cells[row + 1, col].cellType == cellType.red)
+    //                    {
+    //                        coinsToWin = 3;
+    //                        for (int i = 1; i <= 3; i++)
+    //                        {
+    //                            if (row + i <= 5)
+    //                            {
+    //                                if (cells[row + i, col].cellType == cellType.red)
+    //                                {
+    //                                    //Debug.Log("Checking Red Vertical downward");
+    //                                    coinsToWin -= 1;
+    //                                    if (coinsToWin == 0)
+    //                                    {
+    //                                        Debug.Log(currentType+" wins : Vertically Downward");
+    //                                        UIManager.instUIM.winOn();
+    //                                        GameManager.GMinst.updateWinText(0);
+    //                                    }
+
+    //                                }
+    //                                else
+    //                                {
+    //                                    break;
+    //                                }
+    //                            }
+    //                            else
+    //                            {
+    //                                break;
+    //                            }
+
+    //                        }
+
+    //                    }
+    //                }
+
+
+    //                //Vertical Upward
+    //                if (row - 1 >= 0 )
+    //                {
+    //                    if (cells[row - 1, col].cellType == cellType.red)
+    //                    {
+    //                        coinsToWin = 3;
+    //                        for (int i = 1; i <= 3; i++)
+    //                        {
+    //                            if (row - i >= 0)
+    //                            {
+    //                                if (cells[row - i, col].cellType == cellType.red)
+    //                                {
+    //                                    //Debug.Log("Checking Red Vertical Upward");
+    //                                    coinsToWin -= 1;
+    //                                    if (coinsToWin == 0)
+    //                                    {
+    //                                        Debug.Log(currentType+" wins : Vertically Upward");
+    //                                        UIManager.instUIM.winOn();
+    //                                        GameManager.GMinst.updateWinText(0);
+    //                                    }
+
+
+    //                                }
+    //                                else
+    //                                {
+    //                                    break;
+    //                                }
+    //                            }
+    //                            else
+    //                            {
+    //                                break;
+    //                            }
+    //                        }
+    //                    }
+    //                }
+
+    //                //Diagonal(Left down - Right up)
+    //                if (row - 1 >= 0 && col + 1 <= 6 )
+    //                {
+    //                    if (cells[row - 1, col + 1].cellType == cellType.red)
+    //                    {
+    //                        coinsToWin = 3;
+    //                        for (int i = 1; i <= 3; i++)
+    //                        {
+    //                            if (row - i >= 0 && col + i <= 6)
+    //                            {
+    //                                if (cells[row - i, col + i].cellType == cellType.red)
+    //                                {
+    //                                    //Debug.Log("Checking Red Diagonal(Left down - Right up)");
+    //                                    coinsToWin -= 1;
+    //                                    if (coinsToWin == 0)
+    //                                    {
+    //                                        Debug.Log(currentType+" wins : Diagonal(Left down - Right up)");
+    //                                        UIManager.instUIM.winOn();
+    //                                        GameManager.GMinst.updateWinText(0);
+    //                                    }
+
+
+    //                                }
+    //                                else
+    //                                {
+    //                                    break;
+    //                                }
+    //                            }
+    //                            else
+    //                            {
+    //                                break;
+    //                            }
+    //                        }
+    //                    }
+    //                }
+
+    //                //Diagonal(Right up - Left down)
+    //                if (row + 1 <= 5 && col - 1 >= 0)
+    //                {
+    //                    if (cells[row + 1, col - 1].cellType == cellType.red)
+    //                    {
+    //                        coinsToWin = 3;
+    //                        for (int i = 1; i <= 3; i++)
+    //                        {
+    //                            if (row + i <= 5 && col - i >= 0)
+    //                            {
+    //                                if (cells[row + i, col - i].cellType == cellType.red)
+    //                                {
+    //                                    //Debug.Log("Checking Red Diagonal(Right up - Left down)");
+    //                                    coinsToWin -= 1;
+    //                                    if (coinsToWin == 0)
+    //                                    {
+    //                                        Debug.Log(currentType+" wins : Diagonal(Right up - Left down)");
+    //                                        UIManager.instUIM.winOn();
+    //                                        GameManager.GMinst.updateWinText(0);
+    //                                    }
+
+    //                                }
+    //                                else
+    //                                {
+    //                                    break;
+    //                                }
+    //                            }
+
+    //                            else
+    //                            {
+    //                                break;
+    //                            }
+    //                        }
+    //                    }
+    //                }
+
+
+    //                //Diagonal(Right down - Left up)
+    //                if (row - 1 >= 0 && col - 1 >= 0)
+    //                {
+    //                    if (cells[row - 1, col - 1].cellType == cellType.red)
+    //                    {
+    //                        coinsToWin = 3;
+    //                        for (int i = 1; i <= 3; i++)
+    //                        {
+    //                            if (row - i >= 0 && col - i >= 0)
+    //                            {
+    //                                if (cells[row - i, col - i].cellType == cellType.red)
+    //                                {
+    //                                    //Debug.Log("Checking Red Diagonal(Right down - Left up)");
+    //                                    coinsToWin -= 1;
+    //                                    if (coinsToWin == 0)
+    //                                    {
+    //                                        Debug.Log(currentType+" wins : Diagonal(Right down - Left up)");
+    //                                        UIManager.instUIM.winOn();
+    //                                        GameManager.GMinst.updateWinText(0);
+    //                                    }
+
+    //                                }
+    //                                else
+    //                                {
+    //                                    break;
+    //                                }
+    //                            }
+    //                            else
+    //                            {
+    //                                break;
+    //                            }
+    //                        }
+
+    //                    }
+    //                }
+
+    //                // Diagonal(Left up - Right down)
+    //                if (row + 1 <= 5 && col + 1 <= 6 )
+    //                {
+    //                    if (cells[row + 1, col + 1].cellType == cellType.red)
+    //                    {
+    //                        coinsToWin = 3;
+    //                        for (int i = 1; i <= 3; i++)
+    //                        {
+    //                            if (row + i <= 5 && col + i <= 6)
+    //                            {
+    //                                if (cells[row + i, col + i].cellType == cellType.red)
+    //                                {
+    //                                    //Debug.Log("Checking Red Diagonal(Left up - Right down)");
+    //                                    coinsToWin -= 1;
+    //                                    if (coinsToWin == 0)
+    //                                    {
+    //                                        Debug.Log(currentType+" wins : Diagonal(Left up - Right down");
+    //                                        UIManager.instUIM.winOn();
+    //                                        GameManager.GMinst.updateWinText(0);
+    //                                    }
+
+    //                                }
+    //                                else
+    //                                {
+    //                                    break;
+    //                                }
+    //                            }
+    //                            else
+    //                            {
+    //                                break;
+    //                            }
+    //                        }
+    //                    }
+    //                }
+
+    //            }
+
+    //            if (cells[row, col].cellType == cellType.yellow)
+    //            {
+    //                // Horizontal Forward
+    //                if (col + 1 <= 6)
+    //                {
+    //                    if (cells[row, col + 1].cellType == cellType.yellow)
+    //                    {
+    //                        coinsToWin = 3;
+    //                        for (int i = 1; i <= 3; i++)
+    //                        {
+    //                            if (col + i <= 6)
+    //                            {
+    //                                if (cells[row, col + i].cellType == cellType.yellow)
+    //                                {
+
+    //                                    //Debug.Log("Checking Yellow Horizontal Forward");
+    //                                    coinsToWin -= 1;
+    //                                    if (coinsToWin == 0)
+    //                                    {
+    //                                        Debug.Log("Yellow wins : Horizontally Forward");
+    //                                        UIManager.instUIM.winOn();
+    //                                        GameManager.GMinst.updateWinText(1);
+
+    //                                    }
+
+    //                                }
+    //                                else
+    //                                {
+    //                                    break;
+    //                                }
+
+    //                            }
+    //                            else
+    //                            {
+    //                                break;
+    //                            }
+    //                        }
+    //                    }
+    //                }
+
+    //                if (col - 1 >= 0)
+    //                {
+    //                    //Horizontal Backward
+    //                    if (cells[row, col - 1].cellType == cellType.yellow)
+    //                    {
+    //                        coinsToWin = 3;
+    //                        for (int i = 1; i <= 3; i++)
+    //                        {
+    //                            if (col - i >= 0)
+    //                            {
+
+    //                                if (cells[row, col - i].cellType == cellType.yellow)
+    //                                {
+    //                                    //Debug.Log("Checking Yellow Horizontal Backward");
+    //                                    coinsToWin -= 1;
+    //                                    if (coinsToWin == 0)
+    //                                    {
+    //                                        Debug.Log("Yellow wins : Horizontally Backward");
+    //                                        UIManager.instUIM.winOn();
+    //                                        GameManager.GMinst.updateWinText(1);
+    //                                    }
+
+    //                                }
+    //                                else
+    //                                {
+    //                                    break;
+    //                                }
+    //                            }
+    //                            else
+    //                            {
+    //                                break;
+    //                            }
+
+    //                        }
+
+    //                    }
+    //                }
+
+
+
+    //                //Vertical Downward
+    //                if (row + 1 <= 5)
+    //                {
+    //                    if (cells[row + 1, col].cellType == cellType.yellow)
+    //                    {
+    //                        coinsToWin = 3;
+    //                        for (int i = 1; i <= 3; i++)
+    //                        {
+    //                            if (row + i <= 5)
+    //                            {
+    //                                if (cells[row + i, col].cellType == cellType.yellow)
+    //                                {
+    //                                    //Debug.Log("Checking Yellow Vertical downward");
+    //                                    coinsToWin -= 1;
+    //                                    if (coinsToWin == 0)
+    //                                    {
+    //                                        Debug.Log("Yellow wins : Vertically Downward");
+    //                                        UIManager.instUIM.winOn();
+    //                                        GameManager.GMinst.updateWinText(1);
+    //                                    }
+
+    //                                }
+    //                                else
+    //                                {
+    //                                    break;
+    //                                }
+    //                            }
+    //                            else
+    //                            {
+    //                                break;
+    //                            }
+
+    //                        }
+
+    //                    }
+    //                }
+
+
+    //                //Vertical Upward
+    //                if (row - 1 >= 0)
+    //                {
+    //                    if (cells[row - 1, col].cellType == cellType.yellow)
+    //                    {
+    //                        coinsToWin = 3;
+    //                        for (int i = 1; i <= 3; i++)
+    //                        {
+    //                            if (row - i >= 0)
+    //                            {
+    //                                if (cells[row - i, col].cellType == cellType.yellow)
+    //                                {
+    //                                    //Debug.Log("Checking Yellow Vertical Upward");
+    //                                    coinsToWin -= 1;
+    //                                    if (coinsToWin == 0)
+    //                                    {
+    //                                        Debug.Log("Yellow wins : Vertically Upward");
+    //                                        UIManager.instUIM.winOn();
+    //                                        GameManager.GMinst.updateWinText(1);
+    //                                    }
+
+
+    //                                }
+    //                                else
+    //                                {
+    //                                    break;
+    //                                }
+    //                            }
+    //                            else
+    //                            {
+    //                                break;
+    //                            }
+    //                        }
+    //                    }
+    //                }
+
+    //                //Diagonal(Left down - Right up)
+    //                if (row - 1 >= 0 && col + 1 <= 6)
+    //                {
+    //                    if (cells[row - 1, col + 1].cellType == cellType.yellow)
+    //                    {
+    //                        coinsToWin = 3;
+    //                        for (int i = 1; i <= 3; i++)
+    //                        {
+    //                            if (row - i >= 0 && col + i <= 6)
+    //                            {
+    //                                if (cells[row - i, col + i].cellType == cellType.yellow)
+    //                                {
+    //                                    //Debug.Log("Checking Yellow Diagonal(Left down - Right up)");
+    //                                    coinsToWin -= 1;
+    //                                    if (coinsToWin == 0)
+    //                                    {
+    //                                        Debug.Log("Yellow wins : Diagonal(Left down - Right up)");
+    //                                        UIManager.instUIM.winOn();
+    //                                        GameManager.GMinst.updateWinText(1);
+    //                                    }
+
+
+    //                                }
+    //                                else
+    //                                {
+    //                                    break;
+    //                                }
+    //                            }
+    //                            else
+    //                            {
+    //                                break;
+    //                            }
+    //                        }
+    //                    }
+    //                }
+
+    //                //Diagonal(Right up - Left down)
+    //                if (row + 1 <= 5 && col - 1 >= 0)
+    //                {
+    //                    if (cells[row + 1, col - 1].cellType == cellType.yellow)
+    //                    {
+    //                        coinsToWin = 3;
+    //                        for (int i = 1; i <= 3; i++)
+    //                        {
+    //                            if (row + i <= 5 && col - i >= 0)
+    //                            {
+    //                                if (cells[row + i, col - i].cellType == cellType.yellow)
+    //                                {
+    //                                    //Debug.Log("Checking Yellow Diagonal(Right up - Left down)");
+    //                                    coinsToWin -= 1;
+    //                                    if (coinsToWin == 0)
+    //                                    {
+    //                                        Debug.Log("Yellow wins : Diagonal(Right up - Left down)");
+    //                                        UIManager.instUIM.winOn();
+    //                                        GameManager.GMinst.updateWinText(1);
+    //                                    }
+
+    //                                }
+    //                                else
+    //                                {
+    //                                    break;
+    //                                }
+    //                            }
+
+    //                            else
+    //                            {
+    //                                break;
+    //                            }
+    //                        }
+    //                    }
+    //                }
+
+
+    //                //Diagonal(Right down - Left up)
+    //                if (row - 1 >= 0 && col - 1 >= 0)
+    //                {
+    //                    if (cells[row - 1, col - 1].cellType == cellType.yellow)
+    //                    {
+    //                        coinsToWin = 3;
+    //                        for (int i = 1; i <= 3; i++)
+    //                        {
+    //                            if (row - i >= 0 && col - i >= 0)
+    //                            {
+    //                                if (cells[row - i, col - i].cellType == cellType.yellow)
+    //                                {
+    //                                    //Debug.Log("Checking Yellow Diagonal(Right down - Left up)");
+    //                                    coinsToWin -= 1;
+    //                                    if (coinsToWin == 0)
+    //                                    {
+    //                                        Debug.Log("Yellow wins : Diagonal(Right down - Left up)");
+    //                                        UIManager.instUIM.winOn();
+    //                                        GameManager.GMinst.updateWinText(1);
+    //                                    }
+
+    //                                }
+    //                                else
+    //                                {
+    //                                    break;
+    //                                }
+    //                            }
+    //                            else
+    //                            {
+    //                                break;
+    //                            }
+    //                        }
+
+    //                    }
+    //                }
+
+    //                // Diagonal(Left up - Right down)
+    //                if (row + 1 <= 5 && col + 1 <= 6)
+    //                {
+    //                    if (cells[row + 1, col + 1].cellType == cellType.yellow)
+    //                    {
+    //                        coinsToWin = 3;
+    //                        for (int i = 1; i <= 3; i++)
+    //                        {
+    //                            if (row + i <= 5 && col + i <= 6)
+    //                            {
+    //                                if (cells[row + i, col + i].cellType == cellType.yellow)
+    //                                {
+    //                                   // Debug.Log("Checking Yellow Diagonal(Left up - Right down)");
+    //                                    coinsToWin -= 1;
+    //                                    if (coinsToWin == 0)
+    //                                    {
+    //                                        Debug.Log("Yellow wins : Diagonal(Left up - Right down");
+    //                                        UIManager.instUIM.winOn();
+    //                                        GameManager.GMinst.updateWinText(1);
+    //                                    }
+
+    //                                }
+    //                                else
+    //                                {
+    //                                    break;
+    //                                }
+    //                            }
+    //                            else
+    //                            {
+    //                                break;
+    //                            }
+    //                        }
+    //                    }
+    //                }
+
+    //            }
+    //        }
+    //    }
+
+    //}
+
+
+
+
+    public void checkWin(cellType currentType)
     {
 
         for (int col = 0; col <= column - 1; col++)
@@ -134,28 +756,32 @@ public class GridManager : MonoBehaviour
 
 
 
-                if (cells[row, col].cellType == cellType.red)
+                if (cells[row, col].cellType == currentType)
                 {
                     // Horizontal Forward
                     if (col + 1 <= 6)
                     {
-                        if (cells[row, col + 1].cellType == cellType.red)
+                        if (cells[row, col + 1].cellType == currentType)
                         {
                             coinsToWin = 3;
                             for (int i = 1; i <= 3; i++)
                             {
                                 if (col + i <= 6)
                                 {
-                                    if (cells[row, col + i].cellType == cellType.red)
+                                    if (cells[row, col + i].cellType == currentType)
                                     {
 
-                                        Debug.Log("Checking Horizontal Forward");
+                                        // Debug.Log("Checking Red Horizontal Forward");
                                         coinsToWin -= 1;
                                         if (coinsToWin == 0)
                                         {
-                                            Debug.Log("Red wins : Horizontally Forward");
+                                            Debug.Log(currentType + " wins : Horizontally Forward");
                                             UIManager.instUIM.winOn();
-                                            
+                                            if (currentType == cellType.red)
+                                                GameManager.GMinst.updateWinText(0);
+                                            if (currentType == cellType.yellow)
+                                                GameManager.GMinst.updateWinText(1);
+
                                         }
 
                                     }
@@ -176,7 +802,7 @@ public class GridManager : MonoBehaviour
                     if (col - 1 >= 0)
                     {
                         //Horizontal Backward
-                        if (cells[row, col - 1].cellType == cellType.red)
+                        if (cells[row, col - 1].cellType == currentType)
                         {
                             coinsToWin = 3;
                             for (int i = 1; i <= 3; i++)
@@ -184,14 +810,18 @@ public class GridManager : MonoBehaviour
                                 if (col - i >= 0)
                                 {
 
-                                    if (cells[row, col - i].cellType == cellType.red)
+                                    if (cells[row, col - i].cellType == currentType)
                                     {
-                                        Debug.Log("Checking Horizontal Backward");
+                                        //Debug.Log("Checking Red Horizontal Backward");
                                         coinsToWin -= 1;
                                         if (coinsToWin == 0)
                                         {
-                                            Debug.Log("Red wins : Horizontally Backward");
+                                            Debug.Log(currentType + " wins : Horizontally Backward");
                                             UIManager.instUIM.winOn();
+                                            if (currentType == cellType.red)
+                                                GameManager.GMinst.updateWinText(0);
+                                            if (currentType == cellType.yellow)
+                                                GameManager.GMinst.updateWinText(1);
                                         }
 
                                     }
@@ -213,23 +843,27 @@ public class GridManager : MonoBehaviour
 
 
                     //Vertical Downward
-                    if (row + 1 <= 5 )
+                    if (row + 1 <= 5)
                     {
-                        if (cells[row + 1, col].cellType == cellType.red)
+                        if (cells[row + 1, col].cellType == currentType)
                         {
                             coinsToWin = 3;
                             for (int i = 1; i <= 3; i++)
                             {
                                 if (row + i <= 5)
                                 {
-                                    if (cells[row + i, col].cellType == cellType.red)
+                                    if (cells[row + i, col].cellType == currentType)
                                     {
-                                        Debug.Log("Checking Vertical downward");
+                                        //Debug.Log("Checking Red Vertical downward");
                                         coinsToWin -= 1;
                                         if (coinsToWin == 0)
                                         {
-                                            Debug.Log("Red wins : Vertically Downward");
+                                            Debug.Log(currentType + " wins : Vertically Downward");
                                             UIManager.instUIM.winOn();
+                                            if (currentType == cellType.red)
+                                                GameManager.GMinst.updateWinText(0);
+                                            if (currentType == cellType.yellow)
+                                                GameManager.GMinst.updateWinText(1);
                                         }
 
                                     }
@@ -250,23 +884,27 @@ public class GridManager : MonoBehaviour
 
 
                     //Vertical Upward
-                    if (row - 1 >= 0 )
+                    if (row - 1 >= 0)
                     {
-                        if (cells[row - 1, col].cellType == cellType.red)
+                        if (cells[row - 1, col].cellType == currentType)
                         {
                             coinsToWin = 3;
                             for (int i = 1; i <= 3; i++)
                             {
                                 if (row - i >= 0)
                                 {
-                                    if (cells[row - i, col].cellType == cellType.red)
+                                    if (cells[row - i, col].cellType == currentType)
                                     {
-                                        Debug.Log("Checking Vertical Upward");
+                                        //Debug.Log("Checking Red Vertical Upward");
                                         coinsToWin -= 1;
                                         if (coinsToWin == 0)
                                         {
-                                            Debug.Log("Red wins : Vertically Upward");
+                                            Debug.Log(currentType + " wins : Vertically Upward");
                                             UIManager.instUIM.winOn();
+                                            if (currentType == cellType.red)
+                                                GameManager.GMinst.updateWinText(0);
+                                            if (currentType == cellType.yellow)
+                                                GameManager.GMinst.updateWinText(1);
                                         }
 
 
@@ -285,23 +923,27 @@ public class GridManager : MonoBehaviour
                     }
 
                     //Diagonal(Left down - Right up)
-                    if (row - 1 >= 0 && col + 1 <= 6 )
+                    if (row - 1 >= 0 && col + 1 <= 6)
                     {
-                        if (cells[row - 1, col + 1].cellType == cellType.red)
+                        if (cells[row - 1, col + 1].cellType == currentType)
                         {
                             coinsToWin = 3;
                             for (int i = 1; i <= 3; i++)
                             {
                                 if (row - i >= 0 && col + i <= 6)
                                 {
-                                    if (cells[row - i, col + i].cellType == cellType.red)
+                                    if (cells[row - i, col + i].cellType == currentType)
                                     {
-                                        Debug.Log("Checking Diagonal(Left down - Right up)");
+                                        //Debug.Log("Checking Red Diagonal(Left down - Right up)");
                                         coinsToWin -= 1;
                                         if (coinsToWin == 0)
                                         {
-                                            Debug.Log("Red wins : Diagonal(Left down - Right up)");
+                                            Debug.Log(currentType + " wins : Diagonal(Left down - Right up)");
                                             UIManager.instUIM.winOn();
+                                            if (currentType == cellType.red)
+                                                GameManager.GMinst.updateWinText(0);
+                                            if (currentType == cellType.yellow)
+                                                GameManager.GMinst.updateWinText(1);
                                         }
 
 
@@ -322,21 +964,25 @@ public class GridManager : MonoBehaviour
                     //Diagonal(Right up - Left down)
                     if (row + 1 <= 5 && col - 1 >= 0)
                     {
-                        if (cells[row + 1, col - 1].cellType == cellType.red)
+                        if (cells[row + 1, col - 1].cellType == currentType)
                         {
                             coinsToWin = 3;
                             for (int i = 1; i <= 3; i++)
                             {
                                 if (row + i <= 5 && col - i >= 0)
                                 {
-                                    if (cells[row + i, col - i].cellType == cellType.red)
+                                    if (cells[row + i, col - i].cellType == currentType)
                                     {
-                                        Debug.Log("Checking Diagonal(Right up - Left down)");
+                                        //Debug.Log("Checking Red Diagonal(Right up - Left down)");
                                         coinsToWin -= 1;
                                         if (coinsToWin == 0)
                                         {
-                                            Debug.Log("Red wins : Diagonal(Right up - Left down)");
+                                            Debug.Log(currentType + " wins : Diagonal(Right up - Left down)");
                                             UIManager.instUIM.winOn();
+                                            if (currentType == cellType.red)
+                                                GameManager.GMinst.updateWinText(0);
+                                            if (currentType == cellType.yellow)
+                                                GameManager.GMinst.updateWinText(1);
                                         }
 
                                     }
@@ -358,21 +1004,25 @@ public class GridManager : MonoBehaviour
                     //Diagonal(Right down - Left up)
                     if (row - 1 >= 0 && col - 1 >= 0)
                     {
-                        if (cells[row - 1, col - 1].cellType == cellType.red)
+                        if (cells[row - 1, col - 1].cellType == currentType)
                         {
                             coinsToWin = 3;
                             for (int i = 1; i <= 3; i++)
                             {
                                 if (row - i >= 0 && col - i >= 0)
                                 {
-                                    if (cells[row - i, col - i].cellType == cellType.red)
+                                    if (cells[row - i, col - i].cellType == currentType)
                                     {
-                                        Debug.Log("Checking Diagonal(Right down - Left up)");
+                                        //Debug.Log("Checking Red Diagonal(Right down - Left up)");
                                         coinsToWin -= 1;
                                         if (coinsToWin == 0)
                                         {
-                                            Debug.Log("Red wins : Diagonal(Right down - Left up)");
+                                            Debug.Log(currentType + " wins : Diagonal(Right down - Left up)");
                                             UIManager.instUIM.winOn();
+                                            if (currentType == cellType.red)
+                                                GameManager.GMinst.updateWinText(0);
+                                            if (currentType == cellType.yellow)
+                                                GameManager.GMinst.updateWinText(1);
                                         }
 
                                     }
@@ -391,23 +1041,27 @@ public class GridManager : MonoBehaviour
                     }
 
                     // Diagonal(Left up - Right down)
-                    if (row + 1 <= 5 && col + 1 <= 6 )
+                    if (row + 1 <= 5 && col + 1 <= 6)
                     {
-                        if (cells[row + 1, col + 1].cellType == cellType.red)
+                        if (cells[row + 1, col + 1].cellType == currentType)
                         {
                             coinsToWin = 3;
                             for (int i = 1; i <= 3; i++)
                             {
                                 if (row + i <= 5 && col + i <= 6)
                                 {
-                                    if (cells[row + i, col + i].cellType == cellType.red)
+                                    if (cells[row + i, col + i].cellType == currentType)
                                     {
-                                        Debug.Log("Checking Diagonal(Left up - Right down)");
+                                        //Debug.Log("Checking Red Diagonal(Left up - Right down)");
                                         coinsToWin -= 1;
                                         if (coinsToWin == 0)
                                         {
-                                            Debug.Log("Red wins : Diagonal(Left up - Right down");
+                                            Debug.Log(currentType + " wins : Diagonal(Left up - Right down");
                                             UIManager.instUIM.winOn();
+                                            if (currentType == cellType.red)
+                                                GameManager.GMinst.updateWinText(0);
+                                            if (currentType == cellType.yellow)
+                                                GameManager.GMinst.updateWinText(1);
                                         }
 
                                     }
@@ -425,15 +1079,9 @@ public class GridManager : MonoBehaviour
                     }
 
                 }
-
-                //}
-                //}
             }
         }
-
     }
-
-
 }
 
 

@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     public Color P2text;
 
 
-    List<Cell> cells = new List<Cell>();
+    //List<Cell> cells = new List<Cell>();
 
     public GameObject coin1;
     public GameObject coin2;
@@ -33,9 +33,10 @@ public class GameManager : MonoBehaviour
     public Image p2Pointer;
     public Image pBotPointer;
 
+    public Text winText;
+
     Player currentPlayer;
 
-    //public plyenum Number;
 
     public static GameManager GMinst;
 
@@ -57,8 +58,12 @@ public class GameManager : MonoBehaviour
         IsGamePlaying = true;
         turns++;
         p1Pointer.enabled = true;
-        turnText.text = "Player 1 's turn";
 
+        turnText.text = "Player 1 's turn";
+        turnText.color = P1text;
+        p1Pointer.enabled = true;
+        p2Pointer.enabled = false;
+        pBotPointer.enabled = false;
     }
 
     public void gamebotstart()
@@ -67,8 +72,12 @@ public class GameManager : MonoBehaviour
         IsPlayerBOT = true;
         turns++;
         p1Pointer.enabled = true;
-        turnText.text = "Player's turn";
 
+        turnText.text = "Player's turn";
+        turnText.color = P1text;
+        p1Pointer.enabled = true;
+        p2Pointer.enabled = false;
+        pBotPointer.enabled = false;
     }
 
 
@@ -79,8 +88,37 @@ public class GameManager : MonoBehaviour
         turns = 1;
     }
 
+    public void Reset()
+    {
+        IsGamePlaying = true;
+        turns = 2;
+        turnText.text = "Player's turn";
+        turnText.color = P1text;
+    }
 
+    public void updateWinText(int id)
+    {
+        IsGamePlaying = false;
+        if (id == 0)
+        {
+            winText.text = "Player 1 ";
+            winText.color = P1text;
+        }
 
+        if (id == 1)
+        {
+            if (IsPlayerBOT)
+            {
+                winText.text = "BOT";
+                winText.color = Bottext;
+            }
+            else
+            {
+                winText.text = "Player 2";
+                winText.color = P2text;
+            }
+        }
+    }
 
 
     public void callplayer(plyenum plyenum)
@@ -92,60 +130,60 @@ public class GameManager : MonoBehaviour
 
 
 
-       // if (GridManager.colLimit == false)
+        // if (GridManager.colLimit == false)
         //{
-            foreach (Player pl in allPlayers)
+        foreach (Player pl in allPlayers)
+        {
+            if (pl.Number == plyenum)
             {
-                if (pl.Number == plyenum)
-                {
-                    currentPlayer = pl;
-                    break;
-                }
+                currentPlayer = pl;
+                break;
+            }
+
+
+        }
+        //Debug.Log(currentPlayer.playerName + "'s turnfinised");
+        if (currentPlayer.Number == plyenum.Player1)
+        {
+
+            if (IsPlayerBOT)
+            {
+
+                p1Pointer.enabled = false;
+                pBotPointer.enabled = true;
+                turnText.text = "Bot's turn";
+                turnText.color = Bottext;
 
 
             }
-            //Debug.Log(currentPlayer.playerName + "'s turnfinised");
-            if (currentPlayer.Number == plyenum.Player1)
+
+            else
             {
-
-                if (IsPlayerBOT)
-                {
-
-                    p1Pointer.enabled = false;
-                    pBotPointer.enabled = true;
-                    turnText.text = "Bot's turn";
-                    turnText.color = Bottext;
-
-
-                }
-
-                else
-                {
-                    p1Pointer.enabled = false;
-                    p2Pointer.enabled = true;
-                    turnText.text = "Player 2's turn";
-                    turnText.color = P2text;
-
-                }
-            }
-
-            if (currentPlayer.Number == plyenum.Player2)
-            {
-                p1Pointer.enabled = true;
-                p2Pointer.enabled = false;
-                turnText.text = "Player 1 's turn";
-                turnText.color = P1text;
+                p1Pointer.enabled = false;
+                p2Pointer.enabled = true;
+                turnText.text = "Player 2's turn";
+                turnText.color = P2text;
 
             }
+        }
 
-            if (currentPlayer.Number == plyenum.playerBOT)
-            {
-                p1Pointer.enabled = true;
-                pBotPointer.enabled = false;
-                turnText.text = "Player's turn";
-                turnText.color = P1text;
+        if (currentPlayer.Number == plyenum.Player2)
+        {
+            p1Pointer.enabled = true;
+            p2Pointer.enabled = false;
+            turnText.text = "Player 1 's turn";
+            turnText.color = P1text;
 
-            }
+        }
+
+        if (currentPlayer.Number == plyenum.playerBOT)
+        {
+            p1Pointer.enabled = true;
+            pBotPointer.enabled = false;
+            turnText.text = "Player's turn";
+            turnText.color = P1text;
+
+        }
 
         //}
 
@@ -167,8 +205,8 @@ public class GameManager : MonoBehaviour
                     {
                         //if (GridManager.colLimit == false)
                         //{
-                            callplayer(plyenum.Player1);
-                            turns++;
+                        callplayer(plyenum.Player1);
+                        turns++;
 
                         //}
                     }
@@ -176,8 +214,8 @@ public class GameManager : MonoBehaviour
                     {
                         //if (GridManager.colLimit == false)
                         //{
-                            callplayer(plyenum.playerBOT);
-                            turns++;
+                        callplayer(plyenum.playerBOT);
+                        turns++;
 
                         //}
                     }
@@ -196,8 +234,8 @@ public class GameManager : MonoBehaviour
                     {
                         //if (GridManager.colLimit == false)
                         //{
-                            callplayer(plyenum.Player1);
-                            turns++;
+                        callplayer(plyenum.Player1);
+                        turns++;
 
                         //}
                     }
@@ -206,8 +244,8 @@ public class GameManager : MonoBehaviour
 
                         //if (GridManager.colLimit == false)
                         //{
-                            callplayer(plyenum.Player2);
-                            turns++;
+                        callplayer(plyenum.Player2);
+                        turns++;
 
                         //}
                     }
@@ -222,14 +260,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-    private void Update()
+    public void TakeInput()
     {
-        mousePosUpdated = Input.mousePosition;
-        mousePosUpdated = Camera.main.ScreenToWorldPoint(mousePosUpdated);
-
-        if (Input.GetMouseButtonDown(0))
+        if (IsGamePlaying)
         {
+
             Ray ray = Camera.main.ScreenPointToRay(new Vector3(mousePosUpdated.x, mousePosUpdated.y, 0));
             RaycastHit2D hit = Physics2D.Raycast(mousePosUpdated, Vector3.forward);
             if (Physics2D.Raycast(mousePosUpdated, Vector3.forward, layer))
@@ -247,7 +282,7 @@ public class GameManager : MonoBehaviour
                             // GridManager.gridMinst.checkWin();
                             GridManager.gridMinst.checkcolume(c, cellType.red);
 
-                            GridManager.gridMinst.checkWin();
+                            GridManager.gridMinst.checkWin(cellType.red);
 
 
 
@@ -255,7 +290,7 @@ public class GameManager : MonoBehaviour
                         else
                         {
                             GridManager.gridMinst.checkcolume(c, cellType.yellow);
-
+                            GridManager.gridMinst.checkWin(cellType.yellow);
 
                         }
 
@@ -268,6 +303,21 @@ public class GameManager : MonoBehaviour
                 }
 
             }
+        }
+        else
+        {
+            Debug.Log("Game over , NO INPUT");
+        }
+    }
+
+    private void Update()
+    {
+        mousePosUpdated = Input.mousePosition;
+        mousePosUpdated = Camera.main.ScreenToWorldPoint(mousePosUpdated);
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            TakeInput();
 
         }
     }
