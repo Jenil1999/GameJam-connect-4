@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     bool IsGamePlaying = false;
     bool IsPlayerBOT = false;
 
+    public static bool IsBotTurn = false;
+
     Vector2 mousePosUpdated;
 
     public Text turnText;
@@ -260,7 +262,44 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void TakeInput()
+    public void TakeInputvsBOT()
+    {
+        if (IsGamePlaying)
+        {
+            IsBotTurn = false;
+            Ray ray = Camera.main.ScreenPointToRay(new Vector3(mousePosUpdated.x, mousePosUpdated.y, 0));
+            RaycastHit2D hit = Physics2D.Raycast(mousePosUpdated, Vector3.forward);
+            if (Physics2D.Raycast(mousePosUpdated, Vector3.forward, layer))
+            {
+                if (hit.collider != null)
+                {
+                    if (turns != 1)
+                    {
+                        // Debug.Log(hit.collider.name);
+                        int c = hit.collider.GetComponent<Column>().colNUm;
+                        GridManager.gridMinst.checkcolume(c, cellType.red);
+
+                        GridManager.gridMinst.checkWin(cellType.red);
+
+
+
+                    }
+                    else
+                    {
+
+                    }
+
+                }
+
+            }
+        }
+        else
+        {
+            Debug.Log("Game over , NO INPUT");
+        }
+    }
+
+    public void TakeInputTwoPlayer()
     {
         if (IsGamePlaying)
         {
@@ -279,7 +318,7 @@ public class GameManager : MonoBehaviour
                         if (turns % 2 == 0)
                         {
 
-                            // GridManager.gridMinst.checkWin();
+                            
                             GridManager.gridMinst.checkcolume(c, cellType.red);
 
                             GridManager.gridMinst.checkWin(cellType.red);
@@ -310,6 +349,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void BDBOT()
+    {
+        if (turns < 42)
+        {
+            IsBotTurn = true;
+            int c = Random.Range(0, 7);
+            GridManager.gridMinst.checkcolume(c, cellType.yellow);
+
+        }
+        else
+        {
+            Debug.Log("Match draw");
+        }
+
+        GridManager.gridMinst.checkWin(cellType.yellow);
+    }
+
+
+
     private void Update()
     {
         mousePosUpdated = Input.mousePosition;
@@ -317,7 +375,19 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            TakeInput();
+            if (IsPlayerBOT)
+            {
+                TakeInputvsBOT();
+                if (IsGamePlaying)
+                {
+                    BDBOT();
+
+                }
+            }
+            else
+            {
+                TakeInputTwoPlayer();
+            }
 
         }
     }
@@ -325,5 +395,6 @@ public class GameManager : MonoBehaviour
 
 
 }
+
 
 
