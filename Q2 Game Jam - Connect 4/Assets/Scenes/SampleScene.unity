@@ -415,11 +415,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2146668377}
-  - {fileID: 896997669}
-  - {fileID: 620954798}
   - {fileID: 1052735304}
   - {fileID: 837856792}
   - {fileID: 1140889088}
+  - {fileID: 896997669}
+  - {fileID: 620954798}
   - {fileID: 1342113890}
   - {fileID: 1998825244}
   - {fileID: 1494278643}
@@ -1613,7 +1613,7 @@ RectTransform:
   m_Children:
   - {fileID: 1615024814}
   m_Father: {fileID: 65559671}
-  m_RootOrder: 2
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2451,7 +2451,7 @@ RectTransform:
   m_Children:
   - {fileID: 1155747769}
   m_Father: {fileID: 65559671}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -2842,7 +2842,7 @@ RectTransform:
   m_Children:
   - {fileID: 1055566820}
   m_Father: {fileID: 65559671}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3265,7 +3265,7 @@ RectTransform:
   m_Children:
   - {fileID: 809541523}
   m_Father: {fileID: 65559671}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -3602,7 +3602,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 65559671}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4030,8 +4030,7 @@ MonoBehaviour:
   p2Pointer: {fileID: 1693844641}
   pBotPointer: {fileID: 1450878078}
   winText: {fileID: 347488918}
-  redPFB: {fileID: 1404059696981651361, guid: cb00a2a90b6d6429484441c4f4b6c21d, type: 3}
-  YellowPFB: {fileID: 2752682418100749561, guid: 3962a3ecc0809447196a09c98a98dc12, type: 3}
+  coinPFB: {fileID: 1404059696981651361, guid: f56ccde2f9b5743f69f848f8359817ec, type: 3}
 --- !u!4 &1181265438
 Transform:
   m_ObjectHideFlags: 0

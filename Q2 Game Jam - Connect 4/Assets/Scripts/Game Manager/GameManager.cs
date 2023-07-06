@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
@@ -41,10 +42,11 @@ public class GameManager : MonoBehaviour
     cellType CT;
     Cell cellObj;
     bool check = false;
-    float desiredDuration = 0.2f;
+    float desiredDuration = 0.5f;
     float elapsedTime;
-    public GameObject redPFB;
-    public GameObject YellowPFB;
+    public GameObject coinPFB;
+    //public GameObject redPFB;
+    //public GameObject YellowPFB;
 
     Player currentPlayer;
 
@@ -108,28 +110,36 @@ public class GameManager : MonoBehaviour
         turns = 2;
         turnText.text = "Player's turn";
         turnText.color = P1text;
+
+        p1Pointer.enabled = true;
+        p2Pointer.enabled = false;
+        pBotPointer.enabled = false;
     }
 
     public void updateWinText(int id)
     {
-        HasWon = true;
-        if (id == 0)
+        if (HasWon == false)
         {
-            winText.text = "Player 1 ";
-            winText.color = P1text;
-        }
 
-        if (id == 1)
-        {
-            if (IsPlayerBOT)
+            HasWon = true;
+            if (id == 0)
             {
-                winText.text = "BOT";
-                winText.color = Bottext;
+                winText.text = "Player 1 ";
+                winText.color = P1text;
             }
-            else
+
+            if (id == 1)
             {
-                winText.text = "Player 2";
-                winText.color = P2text;
+                if (IsPlayerBOT)
+                {
+                    winText.text = "BOT";
+                    winText.color = Bottext;
+                }
+                else
+                {
+                    winText.text = "Player 2";
+                    winText.color = P2text;
+                }
             }
         }
     }
@@ -393,21 +403,49 @@ public class GameManager : MonoBehaviour
         IsGamePlaying = false;
         CT = ct;
         cellObj = obj;
+        SC = Instantiate(coinPFB, new Vector2(coinPFB.transform.position.x + col, coinPFB.transform.position.y), Quaternion.identity);
         if (ct == cellType.red)
         {
-            SC = Instantiate(redPFB, new Vector2(redPFB.transform.position.x + col, redPFB.transform.position.y), Quaternion.identity);
+            SC.GetComponent<SpriteRenderer>().color = Cell.childcolorREDstat;
         }
         if (ct == cellType.yellow)
         {
-            SC = Instantiate(YellowPFB, new Vector2(YellowPFB.transform.position.x + col, YellowPFB.transform.position.y), Quaternion.identity);
+            SC.GetComponent<SpriteRenderer>().color = Cell.childcolorYellowstat;
         }
-        check = true;
+        //if (ct == cellType.red)
+        //{
+        //    SC = Instantiate(redPFB, new Vector2(redPFB.transform.position.x + col, redPFB.transform.position.y), Quaternion.identity);
+        //}
+        //if (ct == cellType.yellow)
+        //{
+        //    SC = Instantiate(YellowPFB, new Vector2(YellowPFB.transform.position.x + col, YellowPFB.transform.position.y), Quaternion.identity);
+        //}
+        SC.transform.DOMove(obj.transform.position, desiredDuration).SetEase(Ease.OutBounce).OnComplete(() => OndropCompelete());
+
+        //check = true;
+    }
+
+    public void OndropCompelete()
+    {
+        cellObj.GetComponent<Cell>().ChangeType(CT);
+        GridManager.gridMinst.checkWin(CT);
+        Destroy(SC);
+        IsGamePlaying = true;
+        turnChange();
+        elapsedTime = 0f;
+        check = false;
+        if (IsBotTurn)
+        {
+            BDBOT();
+            IsBotTurn = false;
+        }
     }
 
     private void Update()
     {
         mousePosUpdated = Input.mousePosition;
         mousePosUpdated = Camera.main.ScreenToWorldPoint(mousePosUpdated);
+
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -427,38 +465,32 @@ public class GameManager : MonoBehaviour
 
         }
 
-        if (check)
-        {
-            elapsedTime += Time.deltaTime;
-            float percentageComplete = elapsedTime / desiredDuration;
-            SC.transform.position = Vector2.Lerp(SC.transform.position, cellObj.transform.position, percentageComplete);
 
-            if (SC.transform.position == cellObj.transform.position)
-            {
-                if (CT == cellType.red)
-                {
-                    cellObj.GetComponent<Cell>().changeRED();
-                    GridManager.gridMinst.checkWin(CT);
-                }
-                if (CT == cellType.yellow)
-                {
-                    cellObj.GetComponent<Cell>().changeYellow();
-                    GridManager.gridMinst.checkWin(CT);
-                }
 
-                Destroy(SC);
-                IsGamePlaying = true;
-                turnChange();
-                elapsedTime = 0f;
-                check = false;
-                if (IsBotTurn)
-                {
-                    BDBOT();
-                    IsBotTurn = false;
-                }
+        //if (check)
+        //{
+        //    elapsedTime += Time.deltaTime;
+        //    float percentageComplete = elapsedTime / desiredDuration;
+        //    SC.transform.position = Vector2.Lerp(SC.transform.position, cellObj.transform.position, percentageComplete);
 
-            }
-        }
+        //    if (SC.transform.position == cellObj.transform.position)
+        //    {
+
+        //        cellObj.GetComponent<Cell>().ChangeType(CT);
+        //        GridManager.gridMinst.checkWin(CT);
+        //        Destroy(SC);
+        //        IsGamePlaying = true;
+        //        turnChange();
+        //        elapsedTime = 0f;
+        //        check = false;
+        //        if (IsBotTurn)
+        //        {
+        //            BDBOT();
+        //            IsBotTurn = false;
+        //        }
+
+        //    }
+        //}
 
 
     }

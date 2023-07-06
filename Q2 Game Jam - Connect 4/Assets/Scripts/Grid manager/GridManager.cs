@@ -50,7 +50,7 @@ public class GridManager : MonoBehaviour
         //coinsToWin = 4;
         foreach (Cell cell in cells)
         {
-            cell.GetComponent<Cell>().Reset();
+            cell.GetComponent<Cell>().ChangeType(cellType.none);
         }
     }
 
@@ -67,7 +67,7 @@ public class GridManager : MonoBehaviour
             {
                 if (i == 0)
                 {
-                    
+
                     Debug.Log("Same : colume Level reached");
                     if (GameManager.IsBotTurn)
                     {
@@ -80,19 +80,6 @@ public class GridManager : MonoBehaviour
                 {
                     GameManager.GMinst.LerpCoin(SCol, cells[i - 1, SCol], cellT);
 
-                    //if (cellT == cellType.red)
-                    //{
-                    //    cells[i - 1, SCol].GetComponent<Cell>().changeRED();
-                    //}
-
-                    //if (cellT == cellType.yellow)
-                    //    cells[i - 1, SCol].GetComponent<Cell>().changeYellow();
-
-
-
-                    //Debug.Log(cells[i - 1, SCol].transform.position);
-                    //GameManager.GMinst.turnChange();
-
                     break;
 
                 }
@@ -103,14 +90,7 @@ public class GridManager : MonoBehaviour
                 if (cells[i, SCol].cellType == cellType.none)
                 {
                     GameManager.GMinst.LerpCoin(SCol, cells[i, SCol], cellT);
-                    //if (cellT == cellType.red)
-                    //    cells[i, SCol].GetComponent<Cell>().changeRED();
-
-                    //if (cellT == cellType.yellow)
-                    //    cells[i, SCol].GetComponent<Cell>().changeYellow();
-
-                    // Debug.Log(cells[i, SCol].transform.position);
-                    //GameManager.GMinst.turnChange();
+                    
                     break;
                 }
             }
@@ -130,341 +110,150 @@ public class GridManager : MonoBehaviour
         {
             for (int row = 0; row <= Row - 1; row++)
             {
-                //Debug.Log(cells[row, col]);
-                //if (cells[row, col].cellType != cellType.none)
-                //{
-
-
-
 
                 if (cells[row, col].cellType == currentType)
                 {
-                    // Horizontal Forward
-                    if (col + 1 <= 6)
+
+                    // Horizontal
+                    if (col + 1 <= 6 && cells[row, col + 1].cellType == currentType)
                     {
-                        if (cells[row, col + 1].cellType == currentType)
+                        coinsToWin = 3;
+                        for (int i = 1; i <= 3; i++)
                         {
-                            coinsToWin = 3;
-                            for (int i = 1; i <= 3; i++)
+                            if (col + i <= 6 && cells[row, col + i].cellType == currentType)
                             {
-                                if (col + i <= 6)
+                                coinsToWin -= 1;
+                                if (coinsToWin == 0)
                                 {
-                                    if (cells[row, col + i].cellType == currentType)
-                                    {
+                                    Debug.Log(currentType + " wins : Horizontally ");
+                                    UIManager.instUIM.winOn();
 
-                                        // Debug.Log("Checking Red Horizontal Forward");
-                                        coinsToWin -= 1;
-                                        if (coinsToWin == 0)
-                                        {
-                                            Debug.Log(currentType + " wins : Horizontally Forward");
-                                            UIManager.instUIM.winOn();
+                                    if (currentType == cellType.red)
+                                        GameManager.GMinst.updateWinText(0);
+                                    if (currentType == cellType.yellow)
+                                        GameManager.GMinst.updateWinText(1);
 
-                                            if (currentType == cellType.red)
-                                                GameManager.GMinst.updateWinText(0);
-                                            if (currentType == cellType.yellow)
-                                                GameManager.GMinst.updateWinText(1);
-
-                                        }
-
-                                    }
-                                    else
-                                    {
-                                        break;
-                                    }
-
-                                }
-                                else
-                                {
-                                    break;
-                                }
-                            }
-                        }
-                    }
-
-                    if (col - 1 >= 0)
-                    {
-                        //Horizontal Backward
-                        if (cells[row, col - 1].cellType == currentType)
-                        {
-                            coinsToWin = 3;
-                            for (int i = 1; i <= 3; i++)
-                            {
-                                if (col - i >= 0)
-                                {
-
-                                    if (cells[row, col - i].cellType == currentType)
-                                    {
-                                        //Debug.Log("Checking Red Horizontal Backward");
-                                        coinsToWin -= 1;
-                                        if (coinsToWin == 0)
-                                        {
-                                            Debug.Log(currentType + " wins : Horizontally Backward");
-                                            UIManager.instUIM.winOn();
-                                            if (currentType == cellType.red)
-                                                GameManager.GMinst.updateWinText(0);
-                                            if (currentType == cellType.yellow)
-                                                GameManager.GMinst.updateWinText(1);
-                                        }
-
-                                    }
-                                    else
-                                    {
-                                        break;
-                                    }
-                                }
-                                else
-                                {
-                                    break;
                                 }
 
                             }
+                            else
+                            {
+                                break;
+                            }
+
 
                         }
                     }
 
+                    //Vertical 
 
-
-                    //Vertical Downward
-                    if (row + 1 <= 5)
+                    if (row + 1 <= 5 && cells[row + 1, col].cellType == currentType)
                     {
-                        if (cells[row + 1, col].cellType == currentType)
+                        coinsToWin = 3;
+                        for (int i = 1; i <= 3; i++)
                         {
-                            coinsToWin = 3;
-                            for (int i = 1; i <= 3; i++)
-                            {
-                                if (row + i <= 5)
-                                {
-                                    if (cells[row + i, col].cellType == currentType)
-                                    {
-                                        //Debug.Log("Checking Red Vertical downward");
-                                        coinsToWin -= 1;
-                                        if (coinsToWin == 0)
-                                        {
-                                            Debug.Log(currentType + " wins : Vertically Downward");
-                                            UIManager.instUIM.winOn();
-                                            if (currentType == cellType.red)
-                                                GameManager.GMinst.updateWinText(0);
-                                            if (currentType == cellType.yellow)
-                                                GameManager.GMinst.updateWinText(1);
-                                        }
 
-                                    }
-                                    else
-                                    {
-                                        break;
-                                    }
-                                }
-                                else
+                            if (row + i <= 5 && cells[row + i, col].cellType == currentType)
+                            {
+                                //Debug.Log("Checking Red Vertical downward");
+                                coinsToWin -= 1;
+                                if (coinsToWin == 0)
                                 {
-                                    break;
+                                    Debug.Log(currentType + " wins : Vertically ");
+                                    UIManager.instUIM.winOn();
+                                    if (currentType == cellType.red)
+                                        GameManager.GMinst.updateWinText(0);
+                                    if (currentType == cellType.yellow)
+                                        GameManager.GMinst.updateWinText(1);
                                 }
 
                             }
-
-                        }
-                    }
-
-
-                    //Vertical Upward
-                    if (row - 1 >= 0)
-                    {
-                        if (cells[row - 1, col].cellType == currentType)
-                        {
-                            coinsToWin = 3;
-                            for (int i = 1; i <= 3; i++)
+                            else
                             {
-                                if (row - i >= 0)
-                                {
-                                    if (cells[row - i, col].cellType == currentType)
-                                    {
-                                        //Debug.Log("Checking Red Vertical Upward");
-                                        coinsToWin -= 1;
-                                        if (coinsToWin == 0)
-                                        {
-                                            Debug.Log(currentType + " wins : Vertically Upward");
-                                            UIManager.instUIM.winOn();
-                                            if (currentType == cellType.red)
-                                                GameManager.GMinst.updateWinText(0);
-                                            if (currentType == cellType.yellow)
-                                                GameManager.GMinst.updateWinText(1);
-                                        }
-
-
-                                    }
-                                    else
-                                    {
-                                        break;
-                                    }
-                                }
-                                else
-                                {
-                                    break;
-                                }
+                                break;
                             }
+
+
                         }
+
                     }
+
+
+
 
                     //Diagonal(Left down - Right up)
-                    if (row - 1 >= 0 && col + 1 <= 6)
+
+                    if (row - 1 >= 0 && col + 1 <= 6 && cells[row - 1, col + 1].cellType == currentType)
                     {
-                        if (cells[row - 1, col + 1].cellType == currentType)
+                        coinsToWin = 3;
+                        for (int i = 1; i <= 3; i++)
                         {
-                            coinsToWin = 3;
-                            for (int i = 1; i <= 3; i++)
+
+                            if (row - i >= 0 && col + i <= 6 && cells[row - i, col + i].cellType == currentType)
                             {
-                                if (row - i >= 0 && col + i <= 6)
+                                //Debug.Log("Checking Red Diagonal(Left down - Right up)");
+                                coinsToWin -= 1;
+                                if (coinsToWin == 0)
                                 {
-                                    if (cells[row - i, col + i].cellType == currentType)
-                                    {
-                                        //Debug.Log("Checking Red Diagonal(Left down - Right up)");
-                                        coinsToWin -= 1;
-                                        if (coinsToWin == 0)
-                                        {
-                                            Debug.Log(currentType + " wins : Diagonal(Left down - Right up)");
-                                            UIManager.instUIM.winOn();
-                                            if (currentType == cellType.red)
-                                                GameManager.GMinst.updateWinText(0);
-                                            if (currentType == cellType.yellow)
-                                                GameManager.GMinst.updateWinText(1);
-                                        }
+                                    Debug.Log(currentType + " wins : Diagonal Right");
+                                    UIManager.instUIM.winOn();
+                                    if (currentType == cellType.red)
+                                        GameManager.GMinst.updateWinText(0);
+                                    if (currentType == cellType.yellow)
+                                        GameManager.GMinst.updateWinText(1);
+                                }
 
 
-                                    }
-                                    else
-                                    {
-                                        break;
-                                    }
-                                }
-                                else
-                                {
-                                    break;
-                                }
                             }
-                        }
-                    }
-
-                    //Diagonal(Right up - Left down)
-                    if (row + 1 <= 5 && col - 1 >= 0)
-                    {
-                        if (cells[row + 1, col - 1].cellType == currentType)
-                        {
-                            coinsToWin = 3;
-                            for (int i = 1; i <= 3; i++)
+                            else
                             {
-                                if (row + i <= 5 && col - i >= 0)
-                                {
-                                    if (cells[row + i, col - i].cellType == currentType)
-                                    {
-                                        //Debug.Log("Checking Red Diagonal(Right up - Left down)");
-                                        coinsToWin -= 1;
-                                        if (coinsToWin == 0)
-                                        {
-                                            Debug.Log(currentType + " wins : Diagonal(Right up - Left down)");
-                                            UIManager.instUIM.winOn();
-                                            if (currentType == cellType.red)
-                                                GameManager.GMinst.updateWinText(0);
-                                            if (currentType == cellType.yellow)
-                                                GameManager.GMinst.updateWinText(1);
-                                        }
-
-                                    }
-                                    else
-                                    {
-                                        break;
-                                    }
-                                }
-
-                                else
-                                {
-                                    break;
-                                }
+                                break;
                             }
+
                         }
                     }
 
 
                     //Diagonal(Right down - Left up)
-                    if (row - 1 >= 0 && col - 1 >= 0)
-                    {
-                        if (cells[row - 1, col - 1].cellType == currentType)
-                        {
-                            coinsToWin = 3;
-                            for (int i = 1; i <= 3; i++)
-                            {
-                                if (row - i >= 0 && col - i >= 0)
-                                {
-                                    if (cells[row - i, col - i].cellType == currentType)
-                                    {
-                                        //Debug.Log("Checking Red Diagonal(Right down - Left up)");
-                                        coinsToWin -= 1;
-                                        if (coinsToWin == 0)
-                                        {
-                                            Debug.Log(currentType + " wins : Diagonal(Right down - Left up)");
-                                            UIManager.instUIM.winOn();
-                                            if (currentType == cellType.red)
-                                                GameManager.GMinst.updateWinText(0);
-                                            if (currentType == cellType.yellow)
-                                                GameManager.GMinst.updateWinText(1);
-                                        }
 
-                                    }
-                                    else
-                                    {
-                                        break;
-                                    }
-                                }
-                                else
+                    if (row - 1 >= 0 && col - 1 >= 0 && cells[row - 1, col - 1].cellType == currentType)
+                    {
+                        coinsToWin = 3;
+                        for (int i = 1; i <= 3; i++)
+                        {
+
+                            if (row - i >= 0 && col - i >= 0 && cells[row - i, col - i].cellType == currentType)
+                            {
+                                //Debug.Log("Checking Red Diagonal(Right down - Left up)");
+                                coinsToWin -= 1;
+                                if (coinsToWin == 0)
                                 {
-                                    break;
+                                    Debug.Log(currentType + " wins : Diagonal left ");
+                                    UIManager.instUIM.winOn();
+                                    if (currentType == cellType.red)
+                                        GameManager.GMinst.updateWinText(0);
+                                    if (currentType == cellType.yellow)
+                                        GameManager.GMinst.updateWinText(1);
                                 }
+
+                            }
+                            else
+                            {
+                                break;
                             }
 
                         }
+
                     }
 
-                    // Diagonal(Left up - Right down)
-                    if (row + 1 <= 5 && col + 1 <= 6)
-                    {
-                        if (cells[row + 1, col + 1].cellType == currentType)
-                        {
-                            coinsToWin = 3;
-                            for (int i = 1; i <= 3; i++)
-                            {
-                                if (row + i <= 5 && col + i <= 6)
-                                {
-                                    if (cells[row + i, col + i].cellType == currentType)
-                                    {
-                                        //Debug.Log("Checking Red Diagonal(Left up - Right down)");
-                                        coinsToWin -= 1;
-                                        if (coinsToWin == 0)
-                                        {
-                                            Debug.Log(currentType + " wins : Diagonal(Left up - Right down");
-                                            UIManager.instUIM.winOn();
-                                            if (currentType == cellType.red)
-                                                GameManager.GMinst.updateWinText(0);
-                                            if (currentType == cellType.yellow)
-                                                GameManager.GMinst.updateWinText(1);
-                                        }
-
-                                    }
-                                    else
-                                    {
-                                        break;
-                                    }
-                                }
-                                else
-                                {
-                                    break;
-                                }
-                            }
-                        }
-                    }
 
                 }
             }
         }
     }
 }
+
+
 
 
 
