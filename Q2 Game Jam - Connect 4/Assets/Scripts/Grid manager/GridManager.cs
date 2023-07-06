@@ -67,7 +67,7 @@ public class GridManager : MonoBehaviour
             {
                 if (i == 0)
                 {
-                    //colLimit = true;
+                    
                     Debug.Log("Same : colume Level reached");
                     if (GameManager.IsBotTurn)
                     {
@@ -78,15 +78,20 @@ public class GridManager : MonoBehaviour
                 }
                 else
                 {
+                    GameManager.GMinst.LerpCoin(SCol, cells[i - 1, SCol], cellT);
 
-                    if (cellT == cellType.red)
-                        cells[i - 1, SCol].GetComponent<Cell>().changeRED();
+                    //if (cellT == cellType.red)
+                    //{
+                    //    cells[i - 1, SCol].GetComponent<Cell>().changeRED();
+                    //}
 
-                    if (cellT == cellType.yellow)
-                        cells[i - 1, SCol].GetComponent<Cell>().changeYellow();
+                    //if (cellT == cellType.yellow)
+                    //    cells[i - 1, SCol].GetComponent<Cell>().changeYellow();
+
+
 
                     //Debug.Log(cells[i - 1, SCol].transform.position);
-                    GameManager.GMinst.turnChange();
+                    //GameManager.GMinst.turnChange();
 
                     break;
 
@@ -97,15 +102,15 @@ public class GridManager : MonoBehaviour
             {
                 if (cells[i, SCol].cellType == cellType.none)
                 {
-                    colLimit = false;
-                    if (cellT == cellType.red)
-                        cells[i, SCol].GetComponent<Cell>().changeRED();
+                    GameManager.GMinst.LerpCoin(SCol, cells[i, SCol], cellT);
+                    //if (cellT == cellType.red)
+                    //    cells[i, SCol].GetComponent<Cell>().changeRED();
 
-                    if (cellT == cellType.yellow)
-                        cells[i, SCol].GetComponent<Cell>().changeYellow();
+                    //if (cellT == cellType.yellow)
+                    //    cells[i, SCol].GetComponent<Cell>().changeYellow();
 
-                   // Debug.Log(cells[i, SCol].transform.position);
-                    GameManager.GMinst.turnChange();
+                    // Debug.Log(cells[i, SCol].transform.position);
+                    //GameManager.GMinst.turnChange();
                     break;
                 }
             }
@@ -153,6 +158,7 @@ public class GridManager : MonoBehaviour
                                         {
                                             Debug.Log(currentType + " wins : Horizontally Forward");
                                             UIManager.instUIM.winOn();
+
                                             if (currentType == cellType.red)
                                                 GameManager.GMinst.updateWinText(0);
                                             if (currentType == cellType.yellow)

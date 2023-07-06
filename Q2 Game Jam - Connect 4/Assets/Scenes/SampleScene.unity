@@ -4030,6 +4030,8 @@ MonoBehaviour:
   p2Pointer: {fileID: 1693844641}
   pBotPointer: {fileID: 1450878078}
   winText: {fileID: 347488918}
+  redPFB: {fileID: 1404059696981651361, guid: cb00a2a90b6d6429484441c4f4b6c21d, type: 3}
+  YellowPFB: {fileID: 2752682418100749561, guid: 3962a3ecc0809447196a09c98a98dc12, type: 3}
 --- !u!4 &1181265438
 Transform:
   m_ObjectHideFlags: 0
@@ -5617,7 +5619,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -3
   m_Sprite: {fileID: 21300000, guid: d7d7a210a2df640f7a4a8fedc133f4b5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
