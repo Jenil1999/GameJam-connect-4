@@ -7,6 +7,7 @@ using DG.Tweening;
 public class Homescreen : UIScreen
 {
     public GameObject P2;
+    public GameObject Pbot;
     [Range(0.1f, 2)]
     public float _animeDur = 0.2f;
 
@@ -35,9 +36,7 @@ public class Homescreen : UIScreen
     public void StartIdle()
     {
         //Logo.transform.DOMove(LogoPos.position, _animeDur + 0.2f).SetEase(Ease.OutBounce);
-        Logo.transform.DOMove(new Vector3(LogoPos.position.x, LogoPos.position.y - 30, LogoPos.position.z), 0.8f).SetLoops(-1, loopType: LoopType.Yoyo);
-        PvBBTN.transform.DOMove(new Vector3(PvBBTNPos.position.x, PvBBTNPos.position.y - 30, PvBBTNPos.position.z), 0.8f).SetLoops(-1, loopType: LoopType.Yoyo);
-        PvPBTN.transform.DOMove(new Vector3(PvPBTNPos.position.x, PvPBTNPos.position.y - 30, PvPBTNPos.position.z), 0.8f).SetLoops(-1, loopType: LoopType.Yoyo).OnComplete(() => StartIdle()); ;
+        Logo.transform.DOMove(new Vector3(LogoPos.position.x, LogoPos.position.y - 30, LogoPos.position.z), 0.8f).SetLoops(-1, loopType: LoopType.Yoyo).OnComplete(() => StartIdle());
         
     }
 
@@ -50,6 +49,7 @@ public class Homescreen : UIScreen
     {
         UIManager.instUIM.SwitchScreen(ScreenType.Gameplay);
         P2.SetActive(false);
+        Pbot.SetActive(true);
         UIManager.instUIM.levelSelectorOff();
         UIManager.instUIM.BotSelectorOff();
         GameManager.GMinst.gamebotstart();
@@ -57,16 +57,28 @@ public class Homescreen : UIScreen
         PvPBTN.SetActive(true);
     }
 
+    public void HardBotGame()
+    {
+        Debug.Log("Hard mode Soon ");
+    }
+
+
     public void PvPGame()
     {
         UIManager.instUIM.SwitchScreen(ScreenType.Gameplay);
         P2.SetActive(true);
+        Pbot.SetActive(false);
         UIManager.instUIM.levelSelectorOff();
         UIManager.instUIM.BotSelectorOff();
-
         GameManager.GMinst.gamestart();
         GridManager.gridMinst.Reset();
     }
+
+    public void fourPlayerGame()
+    {
+        Debug.Log("4 player mode Soon ");
+    }
+
 
     public void OpenLvlSelect()
     {
@@ -80,14 +92,6 @@ public class Homescreen : UIScreen
         PvPBTN.SetActive(false);
     }
 
-    public void HardBotGame()
-    {
-        Debug.Log("Hard mode Soon ");
-    }
-    public void fourPlayerGame()
-    {
-        Debug.Log("4 player mode Soon ");
-    }
 
     public void Mute()
     {

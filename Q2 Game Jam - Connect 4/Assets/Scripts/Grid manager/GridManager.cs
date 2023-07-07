@@ -12,7 +12,7 @@ public class GridManager : MonoBehaviour
 
     int coinsToWin = 4;
 
-    public static bool colLimit = false;
+    public static bool movelimit = false;
 
     public Cell[,] cells = new Cell[6, 7];
 
@@ -90,7 +90,7 @@ public class GridManager : MonoBehaviour
                 if (cells[i, SCol].cellType == cellType.none)
                 {
                     GameManager.GMinst.LerpCoin(SCol, cells[i, SCol], cellT);
-                    
+
                     break;
                 }
             }
@@ -101,9 +101,11 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    public void ShowWinner(cellType currentType)
+    public void ShowWinner(cellType currentType, string direction)
     {
-
+        Debug.Log(currentType + " wins " + direction);
+        UIManager.instUIM.winOn();
+        GameManager.GMinst.updateWinText(currentType);
     }
 
 
@@ -129,15 +131,7 @@ public class GridManager : MonoBehaviour
                                 coinsToWin -= 1;
                                 if (coinsToWin == 0)
                                 {
-                                    Debug.Log(currentType + " wins : Horizontally ");
-                                    UIManager.instUIM.winOn();
-                                    GameManager.GMinst.updateWinText(currentType);
-
-                                    //if (currentType == cellType.red)
-                                    //    GameManager.GMinst.updateWinText(0);
-                                    //if (currentType == cellType.yellow)
-                                    //    GameManager.GMinst.updateWinText(1);
-
+                                    ShowWinner(currentType, "Horizontally");
                                 }
 
                             }
@@ -164,14 +158,7 @@ public class GridManager : MonoBehaviour
                                 coinsToWin -= 1;
                                 if (coinsToWin == 0)
                                 {
-                                    Debug.Log(currentType + " wins : Vertically ");
-                                    UIManager.instUIM.winOn();
-                                    GameManager.GMinst.updateWinText(currentType);
-
-                                    //if (currentType == cellType.red)
-                                    //    GameManager.GMinst.updateWinText(0);
-                                    //if (currentType == cellType.yellow)
-                                    //    GameManager.GMinst.updateWinText(1);
+                                    ShowWinner(currentType, "Vertically");
                                 }
 
                             }
@@ -202,14 +189,7 @@ public class GridManager : MonoBehaviour
                                 coinsToWin -= 1;
                                 if (coinsToWin == 0)
                                 {
-                                    Debug.Log(currentType + " wins : Diagonal Right");
-                                    UIManager.instUIM.winOn();
-                                    GameManager.GMinst.updateWinText(currentType);
-
-                                    //if (currentType == cellType.red)
-                                    //    GameManager.GMinst.updateWinText(0);
-                                    //if (currentType == cellType.yellow)
-                                    //    GameManager.GMinst.updateWinText(1);
+                                    ShowWinner(currentType, "Diagonal(Left down - Right up)");
                                 }
 
 
@@ -237,14 +217,7 @@ public class GridManager : MonoBehaviour
                                 coinsToWin -= 1;
                                 if (coinsToWin == 0)
                                 {
-                                    Debug.Log(currentType + " wins : Diagonal left ");
-                                    UIManager.instUIM.winOn();
-                                    GameManager.GMinst.updateWinText(currentType);
-
-                                    //if (currentType == cellType.red)
-                                    //    GameManager.GMinst.updateWinText(0);
-                                    //if (currentType == cellType.yellow)
-                                    //    GameManager.GMinst.updateWinText(1);
+                                    ShowWinner(currentType, "Diagonal(Right down - Left up)");
                                 }
 
                             }
@@ -262,8 +235,193 @@ public class GridManager : MonoBehaviour
             }
         }
     }
-}
 
+    public void DetectionResult(int rowMove, int colMove)
+    {
+        Debug.Log("successful detection");
+        if (rowMove < 5)
+        {
+            if (cells[rowMove + 1, colMove] != null)
+            {
+                if (cells[rowMove + 1, colMove].cellType == cellType.red || cells[rowMove + 1, colMove].cellType == cellType.yellow)
+                {
+                    Debug.Log("Bot detected that Player's win move will be : " + colMove);
+                    GameManager.GMinst.Botmove(colMove);
+                }
+
+                else
+                {
+                    Debug.Log("winning move detected but coin cannot be placed there");
+                }
+
+            }
+
+        }
+        if (rowMove == 5)
+        {
+            Debug.Log("Bot detected that Player's win move will be : " + colMove);
+            GameManager.GMinst.Botmove(colMove);
+        }
+
+
+    }
+
+
+    public void BotDetection()
+    {
+        for (int col = 0; col <= column - 1; col++)
+        {
+            for (int row = 0; row <= Row - 1; row++)
+            {
+
+                if (cells[row, col].cellType == cellType.red)
+                {
+                    // Horizontal forward
+                    if (col + 2 <= 6 && cells[row, col + 1] != null && cells[row, col + 1].cellType == cellType.red && cells[row, col + 2] != null && cells[row, col + 2].cellType == cellType.red)
+                    {
+
+
+                        if (col + 3 <= 6 && cells[row, col + 3] != null && cells[row, col + 3].cellType == cellType.none)
+                        {
+                            //check for 4th cell
+                            DetectionResult(row, col + 3);
+                            break;
+                        }
+
+
+
+
+                    }
+                    // Horizontal backward
+                    if (col - 2 >= 0 && cells[row, col - 1] != null && cells[row, col - 1].cellType == cellType.red && cells[row, col - 2] != null && cells[row, col - 2].cellType == cellType.red)
+                    {
+
+
+                        if (col - 3 >= 0 && cells[row, col - 3] != null && cells[row, col - 3].cellType == cellType.none)
+                        {
+                            //check for 4th cell
+                            DetectionResult(row, col - 3);
+                            break;
+                        }
+
+
+
+
+                    }
+
+
+                    //Vertical 
+
+                    if (row - 2 <= 5 && cells[row - 1, col] != null && cells[row - 1, col].cellType == cellType.red && cells[row - 2, col] != null && cells[row - 2, col].cellType == cellType.red)
+                    {
+
+
+
+                        if (row - 3 <= 5 && cells[row - 3, col] != null && cells[row - 3, col].cellType == cellType.none)
+                        {
+
+                            DetectionResult(row, col);
+                            break;
+                        }
+
+
+
+
+
+                    }
+
+
+
+
+                    //Diagonal(Left down - Right up)
+
+                    if (row - 2 >= 0 && col + 2 <= 6 && cells[row - 1, col + 1] != null && cells[row - 1, col + 1].cellType == cellType.red && cells[row - 2, col + 2] != null && cells[row - 2, col + 2].cellType == cellType.red)
+                    {
+
+
+
+                        if (row - 3 >= 0 && col + 3 <= 6 && cells[row - 3, col + 3] != null && cells[row - 3, col + 3].cellType == cellType.none)
+                        {
+
+
+                            DetectionResult(row - 3, col + 3);
+                            break;
+                        }
+
+
+
+                    }
+
+                    //Diagonal(Right up - Left down)
+
+                    if (row + 2 <= 5 && col - 2 >= 0 && cells[row + 1, col - 1] != null && cells[row + 1, col - 1].cellType == cellType.red && cells[row + 2, col - 2] != null && cells[row + 2, col - 2].cellType == cellType.red)
+                    {
+
+
+
+                        if (row + 3 <= 5 && col - 3 >= 0 && cells[row + 3, col - 3] != null && cells[row + 3, col - 3].cellType == cellType.none)
+                        {
+
+
+                            DetectionResult(row + 3, col - 3);
+                            break;
+                        }
+
+
+
+                    }
+
+
+                    //Diagonal(Right down - Left up)
+
+                    if (row - 2 >= 0 && col - 2 >= 0 && cells[row - 1, col - 1] != null && cells[row - 1, col - 1].cellType == cellType.red && cells[row - 2, col - 2] != null && cells[row - 2, col - 2].cellType == cellType.red)
+                    {
+
+
+
+                        if (row - 3 >= 0 && col - 3 >= 0 && cells[row - 3, col - 3] != null && cells[row - 3, col - 3].cellType == cellType.none)
+                        {
+                            DetectionResult(row - 3, col - 3);
+                            break;
+
+                        }
+
+
+
+
+                    }
+
+                    //Diagonal(Left up - Right down)
+
+                    if (row + 2 <= 5 && col + 2 <= 6 && cells[row + 1, col + 1] != null && cells[row + 1, col + 1].cellType == cellType.red && cells[row + 2, col + 2] != null && cells[row + 2, col + 2].cellType == cellType.red)
+                    {
+
+
+                        if (row + 3 <= 5 && col + 3 <= 6 && cells[row + 3, col + 3] != null && cells[row + 3, col + 3].cellType == cellType.none)
+                        {
+
+                            DetectionResult(row + 3, col + 3);
+                            break;
+                        }
+
+
+
+
+                    }
+                }
+                else
+                {
+                    if (col == 6)
+                    {
+                        GameManager.GMinst.Botmove(7);
+                        break;
+                    }
+                    
+                }
+            }
+        }
+    }
+}
 
 
 

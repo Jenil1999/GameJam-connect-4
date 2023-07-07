@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     bool HasWon = false;
 
     public static bool IsBotTurn = false;
+    bool botturn = true;
 
     Vector2 mousePosUpdated;
 
@@ -382,9 +383,12 @@ public class GameManager : MonoBehaviour
         Debug.Log("Bot takes turn");
         if (turns < 42)
         {
+            botturn = true;
             IsBotTurn = true;
-            int c = Random.Range(0, 7);
-            GridManager.gridMinst.checkcolume(c, cellType.yellow);
+            GridManager.gridMinst.BotDetection();
+
+            //int c = Random.Range(0, 7);
+            //GridManager.gridMinst.checkcolume(c, cellType.yellow);
 
         }
         else
@@ -393,6 +397,29 @@ public class GameManager : MonoBehaviour
         }
 
         //GridManager.gridMinst.checkWin(cellType.yellow);
+    }
+
+    public void Botmove(int col)
+    {
+        if (botturn)
+        {
+            Debug.Log("Bot move allowed");
+            botturn = false;
+            if (col == 7)
+            {
+                Debug.Log("No Detection, Random move");
+                int c = Random.Range(0, 7);
+                GridManager.gridMinst.checkcolume(c, cellType.yellow);
+            }
+            else
+            {
+                GridManager.gridMinst.checkcolume(col, cellType.yellow);
+
+            }
+
+        }
+
+
     }
 
     public void LerpCoin(int col, Cell obj, cellType ct)
@@ -409,17 +436,8 @@ public class GameManager : MonoBehaviour
         {
             SC.GetComponent<SpriteRenderer>().color = Cell.childcolorYellowstat;
         }
-        //if (ct == cellType.red)
-        //{
-        //    SC = Instantiate(redPFB, new Vector2(redPFB.transform.position.x + col, redPFB.transform.position.y), Quaternion.identity);
-        //}
-        //if (ct == cellType.yellow)
-        //{
-        //    SC = Instantiate(YellowPFB, new Vector2(YellowPFB.transform.position.x + col, YellowPFB.transform.position.y), Quaternion.identity);
-        //}
-        SC.transform.DOMove(obj.transform.position, desiredDuration).SetEase(Ease.OutBounce).OnComplete(() => OndropCompelete());
 
-        //check = true;
+        SC.transform.DOMove(obj.transform.position, desiredDuration).SetEase(Ease.OutBounce).OnComplete(() => OndropCompelete());
     }
 
     public void OndropCompelete()
@@ -429,6 +447,7 @@ public class GameManager : MonoBehaviour
         Destroy(SC);
         IsGamePlaying = true;
         turnChange();
+
         if (IsBotTurn)
         {
             BDBOT();
