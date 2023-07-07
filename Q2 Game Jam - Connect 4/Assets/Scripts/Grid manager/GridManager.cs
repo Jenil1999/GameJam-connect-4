@@ -101,6 +101,10 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    public void ShowWinner(cellType currentType)
+    {
+
+    }
 
 
     public void checkWin(cellType currentType)
@@ -127,11 +131,12 @@ public class GridManager : MonoBehaviour
                                 {
                                     Debug.Log(currentType + " wins : Horizontally ");
                                     UIManager.instUIM.winOn();
+                                    GameManager.GMinst.updateWinText(currentType);
 
-                                    if (currentType == cellType.red)
-                                        GameManager.GMinst.updateWinText(0);
-                                    if (currentType == cellType.yellow)
-                                        GameManager.GMinst.updateWinText(1);
+                                    //if (currentType == cellType.red)
+                                    //    GameManager.GMinst.updateWinText(0);
+                                    //if (currentType == cellType.yellow)
+                                    //    GameManager.GMinst.updateWinText(1);
 
                                 }
 
@@ -161,10 +166,12 @@ public class GridManager : MonoBehaviour
                                 {
                                     Debug.Log(currentType + " wins : Vertically ");
                                     UIManager.instUIM.winOn();
-                                    if (currentType == cellType.red)
-                                        GameManager.GMinst.updateWinText(0);
-                                    if (currentType == cellType.yellow)
-                                        GameManager.GMinst.updateWinText(1);
+                                    GameManager.GMinst.updateWinText(currentType);
+
+                                    //if (currentType == cellType.red)
+                                    //    GameManager.GMinst.updateWinText(0);
+                                    //if (currentType == cellType.yellow)
+                                    //    GameManager.GMinst.updateWinText(1);
                                 }
 
                             }
@@ -197,10 +204,12 @@ public class GridManager : MonoBehaviour
                                 {
                                     Debug.Log(currentType + " wins : Diagonal Right");
                                     UIManager.instUIM.winOn();
-                                    if (currentType == cellType.red)
-                                        GameManager.GMinst.updateWinText(0);
-                                    if (currentType == cellType.yellow)
-                                        GameManager.GMinst.updateWinText(1);
+                                    GameManager.GMinst.updateWinText(currentType);
+
+                                    //if (currentType == cellType.red)
+                                    //    GameManager.GMinst.updateWinText(0);
+                                    //if (currentType == cellType.yellow)
+                                    //    GameManager.GMinst.updateWinText(1);
                                 }
 
 
@@ -230,10 +239,12 @@ public class GridManager : MonoBehaviour
                                 {
                                     Debug.Log(currentType + " wins : Diagonal left ");
                                     UIManager.instUIM.winOn();
-                                    if (currentType == cellType.red)
-                                        GameManager.GMinst.updateWinText(0);
-                                    if (currentType == cellType.yellow)
-                                        GameManager.GMinst.updateWinText(1);
+                                    GameManager.GMinst.updateWinText(currentType);
+
+                                    //if (currentType == cellType.red)
+                                    //    GameManager.GMinst.updateWinText(0);
+                                    //if (currentType == cellType.yellow)
+                                    //    GameManager.GMinst.updateWinText(1);
                                 }
 
                             }

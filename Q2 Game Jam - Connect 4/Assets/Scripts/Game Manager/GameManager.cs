@@ -41,12 +41,8 @@ public class GameManager : MonoBehaviour
     GameObject SC;
     cellType CT;
     Cell cellObj;
-    bool check = false;
     float desiredDuration = 0.5f;
-    float elapsedTime;
     public GameObject coinPFB;
-    //public GameObject redPFB;
-    //public GameObject YellowPFB;
 
     Player currentPlayer;
 
@@ -100,6 +96,7 @@ public class GameManager : MonoBehaviour
     {
         IsGamePlaying = false;
         IsPlayerBOT = false;
+        IsBotTurn = false;
         turns = 1;
     }
 
@@ -116,19 +113,19 @@ public class GameManager : MonoBehaviour
         pBotPointer.enabled = false;
     }
 
-    public void updateWinText(int id)
+    public void updateWinText(cellType cellType)
     {
         if (HasWon == false)
         {
 
             HasWon = true;
-            if (id == 0)
+            if (cellType == cellType.red)
             {
                 winText.text = "Player 1 ";
                 winText.color = P1text;
             }
 
-            if (id == 1)
+            if (cellType == cellType.yellow)
             {
                 if (IsPlayerBOT)
                 {
@@ -432,8 +429,6 @@ public class GameManager : MonoBehaviour
         Destroy(SC);
         IsGamePlaying = true;
         turnChange();
-        elapsedTime = 0f;
-        check = false;
         if (IsBotTurn)
         {
             BDBOT();

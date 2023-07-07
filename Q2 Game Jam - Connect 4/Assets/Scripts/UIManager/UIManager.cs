@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
 
 
     public Canvas LvlSelect;
-
+    public Canvas BotSelect;
     public Canvas winScreen;
     
 
@@ -54,7 +54,15 @@ public class UIManager : MonoBehaviour
     {
         winScreen.enabled = false;
     }
+    public void BotSelectorOn()
+    {
+        BotSelect.enabled = true;
+    }
 
+    public void BotSelectorOff()
+    {
+        BotSelect.enabled = false;
+    }
 
 
 
