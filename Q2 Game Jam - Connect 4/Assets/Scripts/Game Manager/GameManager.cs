@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public static bool IsBotTurn = false;
     bool botturn = true;
 
-    Vector2 mousePosUpdated;
+    public AudioClip coinDropSound;
 
     public Text turnText;
 
@@ -147,13 +147,6 @@ public class GameManager : MonoBehaviour
 
     public void Callplayer(Plyenum plyenum)
     {
-        Vector3 mousePos;
-        mousePos = Input.mousePosition;
-        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-        mousePosUpdated = mousePos;
-
-
-
 
         foreach (Player pl in allPlayers)
         {
@@ -277,6 +270,7 @@ public class GameManager : MonoBehaviour
         }
         if (turns == 43)
         {
+            UIManager.instUIM.DrawScreenOn();
             Botmove(7);
             Debug.Log("Match draw");
         }
@@ -319,7 +313,7 @@ public class GameManager : MonoBehaviour
         {
             SC.GetComponent<SpriteRenderer>().color = Cell.childcolorYellowstat;
         }
-
+        AudioManager.AM.Playaudio(coinDropSound);
         SC.transform.DOMove(obj.transform.position, desiredDuration).SetEase(Ease.OutBounce).OnComplete(() => OndropCompelete());
     }
 

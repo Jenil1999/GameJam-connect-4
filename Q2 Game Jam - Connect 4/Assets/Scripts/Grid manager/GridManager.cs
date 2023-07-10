@@ -7,6 +7,7 @@ public class GridManager : MonoBehaviour
     public Cell cell;
     public Transform gridParent;
 
+
     public int Row;
     public int column;
 
@@ -106,6 +107,7 @@ public class GridManager : MonoBehaviour
     {
         Debug.Log(currentType + " wins " + direction);
         UIManager.instUIM.WinOn();
+        AudioManager.AM.PlayWinAudio();
         GameManager.GMinst.UpdateWinText(currentType);
     }
 
@@ -128,7 +130,7 @@ public class GridManager : MonoBehaviour
         }
 
         //vertical
-        if (rowIndex + 3 < Row && cells[rowIndex, colIndex] != null && cells[rowIndex, colIndex].cellType == currentType && cells[rowIndex - 1, colIndex] != null && cells[rowIndex + 1, colIndex].cellType == currentType && cells[rowIndex + 2, colIndex] != null && cells[rowIndex + 2, colIndex].cellType == currentType && cells[rowIndex + 3, colIndex] != null && cells[rowIndex + 3, colIndex].cellType == currentType)
+        if (rowIndex + 3 < Row && cells[rowIndex, colIndex] != null && cells[rowIndex, colIndex].cellType == currentType && cells[rowIndex + 1, colIndex] != null && cells[rowIndex + 1, colIndex].cellType == currentType && cells[rowIndex + 2, colIndex] != null && cells[rowIndex + 2, colIndex].cellType == currentType && cells[rowIndex + 3, colIndex] != null && cells[rowIndex + 3, colIndex].cellType == currentType)
         {
             ShowWinner(currentType, "vertical");
         }

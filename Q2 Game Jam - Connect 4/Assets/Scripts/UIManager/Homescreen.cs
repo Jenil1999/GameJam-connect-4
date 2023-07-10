@@ -11,7 +11,6 @@ public class Homescreen : UIScreen
     [Range(0.1f, 2)]
     public float _animeDur = 0.2f;
 
-    [Header("Animated UI")] // Remember to remove it once done
     public GameObject ShopBTN;
     public Transform ShopBTNPos;
     public GameObject MuteBTN;

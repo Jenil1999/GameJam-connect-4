@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     public Canvas LvlSelect;
     public Canvas BotSelect;
     public Canvas winScreen;
-    
+    public Canvas drawScreen;
 
 
     private void Awake()
@@ -34,7 +34,14 @@ public class UIManager : MonoBehaviour
 
         }
     }
-
+    public void DrawScreenOn()
+    {
+        drawScreen.enabled = true;
+    }
+    public void DrawScreenOff()
+    {
+        drawScreen.enabled = false;
+    }
     public void LevelSelectorOn()
     {
         LvlSelect.enabled = true;
