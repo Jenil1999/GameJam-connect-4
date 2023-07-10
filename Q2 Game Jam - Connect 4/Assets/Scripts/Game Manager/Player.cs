@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum plyenum
+public enum Plyenum
 {
     Player1,
     Player2,
@@ -18,5 +18,5 @@ public enum plyenum
 public class Player : MonoBehaviour
 {
     public string playerName;
-    public plyenum Number;
+    public Plyenum Number;
 }

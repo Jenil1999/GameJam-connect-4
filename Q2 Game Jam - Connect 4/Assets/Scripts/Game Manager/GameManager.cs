@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public List<Player> allPlayers;
 
     int turns = 1;
+    int rowIndex;
+    int colIndex;
 
     bool IsGamePlaying = false;
     bool IsPlayerBOT = false;
@@ -63,7 +65,7 @@ public class GameManager : MonoBehaviour
         pBotPointer.enabled = false;
     }
 
-    public void gamestart()
+    public void Gamestart()
     {
         IsGamePlaying = true;
         turns++;
@@ -77,7 +79,7 @@ public class GameManager : MonoBehaviour
         pBotPointer.enabled = false;
     }
 
-    public void gamebotstart()
+    public void Gamebotstart()
     {
         IsGamePlaying = true;
         IsPlayerBOT = true;
@@ -93,7 +95,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void gameend()
+    public void Gameend()
     {
         IsGamePlaying = false;
         IsPlayerBOT = false;
@@ -114,7 +116,7 @@ public class GameManager : MonoBehaviour
         pBotPointer.enabled = false;
     }
 
-    public void updateWinText(cellType cellType)
+    public void UpdateWinText(cellType cellType)
     {
         if (HasWon == false)
         {
@@ -143,7 +145,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void callplayer(plyenum plyenum)
+    public void Callplayer(Plyenum plyenum)
     {
         Vector3 mousePos;
         mousePos = Input.mousePosition;
@@ -152,8 +154,7 @@ public class GameManager : MonoBehaviour
 
 
 
-        // if (GridManager.colLimit == false)
-        //{
+
         foreach (Player pl in allPlayers)
         {
             if (pl.Number == plyenum)
@@ -164,8 +165,8 @@ public class GameManager : MonoBehaviour
 
 
         }
-        //Debug.Log(currentPlayer.playerName + "'s turnfinised");
-        if (currentPlayer.Number == plyenum.Player1)
+
+        if (currentPlayer.Number == Plyenum.Player1)
         {
 
             if (IsPlayerBOT)
@@ -189,7 +190,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (currentPlayer.Number == plyenum.Player2)
+        if (currentPlayer.Number == Plyenum.Player2)
         {
             p1Pointer.enabled = true;
             p2Pointer.enabled = false;
@@ -198,7 +199,7 @@ public class GameManager : MonoBehaviour
 
         }
 
-        if (currentPlayer.Number == plyenum.playerBOT)
+        if (currentPlayer.Number == Plyenum.playerBOT)
         {
             p1Pointer.enabled = true;
             pBotPointer.enabled = false;
@@ -206,15 +207,10 @@ public class GameManager : MonoBehaviour
             turnText.color = P1text;
 
         }
-
-        //}
-
-
-
     }
 
 
-    public void turnChange()
+    public void TurnChange()
     {
         if (HasWon == false)
         {
@@ -227,21 +223,13 @@ public class GameManager : MonoBehaviour
                     {
                         if (turns % 2 == 0)
                         {
-                            //if (GridManager.colLimit == false)
-                            //{
-                            callplayer(plyenum.Player1);
+                            Callplayer(Plyenum.Player1);
                             turns++;
-
-                            //}
                         }
                         else
                         {
-                            //if (GridManager.colLimit == false)
-                            //{
-                            callplayer(plyenum.playerBOT);
+                            Callplayer(Plyenum.playerBOT);
                             turns++;
-
-                            //}
                         }
 
                     }
@@ -256,22 +244,13 @@ public class GameManager : MonoBehaviour
                     {
                         if (turns % 2 == 0)
                         {
-                            //if (GridManager.colLimit == false)
-                            //{
-                            callplayer(plyenum.Player1);
+                            Callplayer(Plyenum.Player1);
                             turns++;
-
-                            //}
                         }
                         else
                         {
-
-                            //if (GridManager.colLimit == false)
-                            //{
-                            callplayer(plyenum.Player2);
+                            Callplayer(Plyenum.Player2);
                             turns++;
-
-                            //}
                         }
 
                     }
@@ -285,27 +264,99 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void TakeInputvsBOT()
+
+    public void BDBOT()
+    {
+        Debug.Log("Bot takes turn");
+        if (turns < 43)
+        {
+            botturn = true;
+            IsBotTurn = true;
+            GridManager.gridMinst.BotDetection();
+
+        }
+        if (turns == 43)
+        {
+            Botmove(7);
+            Debug.Log("Match draw");
+        }
+    }
+
+    public void Botmove(int col)
+    {
+        if (botturn)
+        {
+            Debug.Log("Bot move allowed");
+            botturn = false;
+            if (col == 7)
+            {
+                Debug.Log("No Detection, Random move");
+                int c = Random.Range(0, 7);
+                GridManager.gridMinst.Checkcolume(c, cellType.yellow);
+            }
+            else
+            {
+                GridManager.gridMinst.Checkcolume(col, cellType.yellow);
+            }
+
+        }
+
+    }
+
+    public void LerpCoin(int row,int col, Cell obj, cellType ct)
+    {
+        IsGamePlaying = false;
+        CT = ct;
+        cellObj = obj;
+        rowIndex = row;
+        colIndex = col;
+        SC = Instantiate(coinPFB, new Vector2(coinPFB.transform.position.x + col, coinPFB.transform.position.y), Quaternion.identity);
+        if (ct == cellType.red)
+        {
+            SC.GetComponent<SpriteRenderer>().color = Cell.childcolorREDstat;
+        }
+        if (ct == cellType.yellow)
+        {
+            SC.GetComponent<SpriteRenderer>().color = Cell.childcolorYellowstat;
+        }
+
+        SC.transform.DOMove(obj.transform.position, desiredDuration).SetEase(Ease.OutBounce).OnComplete(() => OndropCompelete());
+    }
+
+    public void OndropCompelete()
+    {
+        cellObj.GetComponent<Cell>().ChangeType(CT);
+        GridManager.gridMinst.CheckWin(rowIndex,colIndex,CT);
+        Destroy(SC);
+        IsGamePlaying = true;
+        TurnChange();
+
+        if (IsBotTurn)
+        {
+            BDBOT();
+            IsBotTurn = false;
+        }
+    }
+
+
+    public void TakeInputvsBOT(Vector2 inputPostion)
     {
         if (HasWon == false)
         {
             if (IsGamePlaying)
             {
                 IsBotTurn = false;
-                Ray ray = Camera.main.ScreenPointToRay(new Vector3(mousePosUpdated.x, mousePosUpdated.y, 0));
-                RaycastHit2D hit = Physics2D.Raycast(mousePosUpdated, Vector3.forward);
-                if (Physics2D.Raycast(mousePosUpdated, Vector3.forward, layer))
+                Ray ray = Camera.main.ScreenPointToRay(new Vector3(inputPostion.x, inputPostion.y, 0));
+                RaycastHit2D hit = Physics2D.Raycast(inputPostion, Vector3.forward);
+                if (Physics2D.Raycast(inputPostion, Vector3.forward, layer))
                 {
                     if (hit.collider != null)
                     {
                         if (turns != 1)
                         {
-                            // Debug.Log(hit.collider.name);
-                            int c = hit.collider.GetComponent<Column>().colNUm;
-                            GridManager.gridMinst.checkcolume(c, cellType.red);
-
-                            GridManager.gridMinst.checkWin(cellType.red);
-
+                            int c = hit.collider.GetComponent<Cell>().colIndex;  //hit.collider.GetComponent<Column>().colNUm;
+                            GridManager.gridMinst.Checkcolume(c, cellType.red);
+                            
                         }
                         else
                         {
@@ -324,41 +375,31 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void TakeInputTwoPlayer()
+    public void TakeInputTwoPlayer(Vector2 inputPostion)
     {
         if (HasWon == false)
         {
-
             if (IsGamePlaying)
             {
 
-                Ray ray = Camera.main.ScreenPointToRay(new Vector3(mousePosUpdated.x, mousePosUpdated.y, 0));
-                RaycastHit2D hit = Physics2D.Raycast(mousePosUpdated, Vector3.forward);
-                if (Physics2D.Raycast(mousePosUpdated, Vector3.forward, layer))
+                Ray ray = Camera.main.ScreenPointToRay(new Vector3(inputPostion.x, inputPostion.y, 0));
+                RaycastHit2D hit = Physics2D.Raycast(inputPostion, Vector3.forward);
+                if (Physics2D.Raycast(inputPostion, Vector3.forward, layer))
                 {
                     if (hit.collider != null)
                     {
                         if (turns != 1)
                         {
-                            // Debug.Log(hit.collider.name);
-                            int c = hit.collider.GetComponent<Column>().colNUm;
-
+                            int c = hit.collider.GetComponent<Cell>().colIndex;  //hit.collider.GetComponent<Column>().colNUm;
                             if (turns % 2 == 0)
                             {
-
-
-                                GridManager.gridMinst.checkcolume(c, cellType.red);
-
-                                GridManager.gridMinst.checkWin(cellType.red);
-
-
-
+                                GridManager.gridMinst.Checkcolume(c, cellType.red);
+                               
                             }
                             else
                             {
-                                GridManager.gridMinst.checkcolume(c, cellType.yellow);
-                                GridManager.gridMinst.checkWin(cellType.yellow);
-
+                                GridManager.gridMinst.Checkcolume(c, cellType.yellow);
+                                
                             }
 
                         }
@@ -378,136 +419,60 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void BDBOT()
+    private void Update()
     {
-        Debug.Log("Bot takes turn");
-        if (turns < 42)
+        if (IsGamePlaying)
         {
-            botturn = true;
-            IsBotTurn = true;
-            GridManager.gridMinst.BotDetection();
-
-            //int c = Random.Range(0, 7);
-            //GridManager.gridMinst.checkcolume(c, cellType.yellow);
-
-        }
-        else
-        {
-            Debug.Log("Match draw");
-        }
-
-        //GridManager.gridMinst.checkWin(cellType.yellow);
-    }
-
-    public void Botmove(int col)
-    {
-        if (botturn)
-        {
-            Debug.Log("Bot move allowed");
-            botturn = false;
-            if (col == 7)
+            if (IsPlayerBOT)
             {
-                Debug.Log("No Detection, Random move");
-                int c = Random.Range(0, 7);
-                GridManager.gridMinst.checkcolume(c, cellType.yellow);
+                CheckInput();
             }
             else
             {
-                GridManager.gridMinst.checkcolume(col, cellType.yellow);
-
+                CheckInput();
             }
-
-        }
-
-
-    }
-
-    public void LerpCoin(int col, Cell obj, cellType ct)
-    {
-        IsGamePlaying = false;
-        CT = ct;
-        cellObj = obj;
-        SC = Instantiate(coinPFB, new Vector2(coinPFB.transform.position.x + col, coinPFB.transform.position.y), Quaternion.identity);
-        if (ct == cellType.red)
-        {
-            SC.GetComponent<SpriteRenderer>().color = Cell.childcolorREDstat;
-        }
-        if (ct == cellType.yellow)
-        {
-            SC.GetComponent<SpriteRenderer>().color = Cell.childcolorYellowstat;
-        }
-
-        SC.transform.DOMove(obj.transform.position, desiredDuration).SetEase(Ease.OutBounce).OnComplete(() => OndropCompelete());
-    }
-
-    public void OndropCompelete()
-    {
-        cellObj.GetComponent<Cell>().ChangeType(CT);
-        GridManager.gridMinst.checkWin(CT);
-        Destroy(SC);
-        IsGamePlaying = true;
-        turnChange();
-
-        if (IsBotTurn)
-        {
-            BDBOT();
-            IsBotTurn = false;
         }
     }
 
-    private void Update()
+    private void CheckInput()
     {
-        mousePosUpdated = Input.mousePosition;
-        mousePosUpdated = Camera.main.ScreenToWorldPoint(mousePosUpdated);
-
-
         if (Input.GetMouseButtonDown(0))
         {
-            if (IsGamePlaying)
+            Vector2 inputPostion = Input.mousePosition;
+            inputPostion = Camera.main.ScreenToWorldPoint(inputPostion);
+            if (IsPlayerBOT)
             {
+                TakeInputvsBOT(inputPostion);
+            }
+            else
+            {
+                TakeInputTwoPlayer(inputPostion);
+            }
+        }
+
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Began)
+            {
+                Vector2 inputPosition = touch.position;
+                inputPosition = Camera.main.ScreenToWorldPoint(inputPosition);
+
                 if (IsPlayerBOT)
                 {
-                    TakeInputvsBOT();
-
+                    TakeInputvsBOT(inputPosition);
                 }
                 else
                 {
-                    TakeInputTwoPlayer();
+                    TakeInputTwoPlayer(inputPosition);
                 }
-
             }
-
         }
-
-
-
-        //if (check)
-        //{
-        //    elapsedTime += Time.deltaTime;
-        //    float percentageComplete = elapsedTime / desiredDuration;
-        //    SC.transform.position = Vector2.Lerp(SC.transform.position, cellObj.transform.position, percentageComplete);
-
-        //    if (SC.transform.position == cellObj.transform.position)
-        //    {
-
-        //        cellObj.GetComponent<Cell>().ChangeType(CT);
-        //        GridManager.gridMinst.checkWin(CT);
-        //        Destroy(SC);
-        //        IsGamePlaying = true;
-        //        turnChange();
-        //        elapsedTime = 0f;
-        //        check = false;
-        //        if (IsBotTurn)
-        //        {
-        //            BDBOT();
-        //            IsBotTurn = false;
-        //        }
-
-        //    }
-        //}
-
-
     }
+
+
+
+
 
 
 

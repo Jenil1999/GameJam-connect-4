@@ -12,6 +12,8 @@ public enum cellType
 
 public class Cell : MonoBehaviour
 {
+    public int rowIndex;
+    public int colIndex;
     public SpriteRenderer child;
     public cellType cellType;
     public Color childcolorRED;
@@ -29,24 +31,12 @@ public class Cell : MonoBehaviour
     {
         cellType = cellType.none;
     }
-    public void changeRED()
-    {
-        child.color = childcolorRED;
-        cellType = cellType.red;
-       // Debug.Log(this.gameObject.name + "of type : " + cellType);
-    }
-    public void changeYellow()
-    {
-        child.color = childcolorYellow;
-        cellType = cellType.yellow;
-        //Debug.Log(this.gameObject.name + "of type : " + cellType);
-    }
+    
 
     public void Reset()
     {
         child.color = reset;
         cellType = cellType.none;
-        //Debug.Log(this.gameObject.name + "of type : " + cellType);
     }
 
     public void ChangeType(cellType ct)

@@ -7,13 +7,13 @@ public class Gameplay : UIScreen
     public void CloseBTN()
     {
         UIManager.instUIM.SwitchScreen(ScreenType.HomeScreen);
-        GameManager.GMinst.gameend();
-        UIManager.instUIM.winOff();
+        GameManager.GMinst.Gameend();
+        UIManager.instUIM.WinOff();
     }
 
     public void Playagain()
     {
-        UIManager.instUIM.winOff();
+        UIManager.instUIM.WinOff();
         GridManager.gridMinst.Reset();
         GameManager.GMinst.Reset();
     }

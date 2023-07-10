@@ -35,9 +35,8 @@ public class Homescreen : UIScreen
 
     public void StartIdle()
     {
-        //Logo.transform.DOMove(LogoPos.position, _animeDur + 0.2f).SetEase(Ease.OutBounce);
         Logo.transform.DOMove(new Vector3(LogoPos.position.x, LogoPos.position.y - 30, LogoPos.position.z), 0.8f).SetLoops(-1, loopType: LoopType.Yoyo).OnComplete(() => StartIdle());
-        
+  
     }
 
     public void ShopOpen()
@@ -50,9 +49,9 @@ public class Homescreen : UIScreen
         UIManager.instUIM.SwitchScreen(ScreenType.Gameplay);
         P2.SetActive(false);
         Pbot.SetActive(true);
-        UIManager.instUIM.levelSelectorOff();
+        UIManager.instUIM.LevelSelectorOff();
         UIManager.instUIM.BotSelectorOff();
-        GameManager.GMinst.gamebotstart();
+        GameManager.GMinst.Gamebotstart();
         GridManager.gridMinst.Reset();
         PvPBTN.SetActive(true);
     }
@@ -68,13 +67,13 @@ public class Homescreen : UIScreen
         UIManager.instUIM.SwitchScreen(ScreenType.Gameplay);
         P2.SetActive(true);
         Pbot.SetActive(false);
-        UIManager.instUIM.levelSelectorOff();
+        UIManager.instUIM.LevelSelectorOff();
         UIManager.instUIM.BotSelectorOff();
-        GameManager.GMinst.gamestart();
+        GameManager.GMinst.Gamestart();
         GridManager.gridMinst.Reset();
     }
 
-    public void fourPlayerGame()
+    public void FourPlayerGame()
     {
         Debug.Log("4 player mode Soon ");
     }
@@ -82,13 +81,13 @@ public class Homescreen : UIScreen
 
     public void OpenLvlSelect()
     {
-        UIManager.instUIM.levelSelectorOn();
+        UIManager.instUIM.LevelSelectorOn();
         UIManager.instUIM.BotSelectorOff();
     }
     public void OpenBotSelect()
     {
         UIManager.instUIM.BotSelectorOn();
-        UIManager.instUIM.levelSelectorOff();
+        UIManager.instUIM.LevelSelectorOff();
         PvPBTN.SetActive(false);
     }
 
@@ -107,7 +106,7 @@ public class Homescreen : UIScreen
 
     public void Outside()
     {
-        UIManager.instUIM.levelSelectorOff();
+        UIManager.instUIM.LevelSelectorOff();
         UIManager.instUIM.BotSelectorOff();
         PvPBTN.SetActive(true);
     }

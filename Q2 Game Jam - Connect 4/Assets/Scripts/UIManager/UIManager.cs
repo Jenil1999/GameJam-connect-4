@@ -35,22 +35,22 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void levelSelectorOn()
+    public void LevelSelectorOn()
     {
         LvlSelect.enabled = true;
     }
 
-    public void levelSelectorOff()
+    public void LevelSelectorOff()
     {
         LvlSelect.enabled = false;
     }
 
-    public void winOn()
+    public void WinOn()
     {
         winScreen.enabled = true;
     }
 
-    public void winOff()
+    public void WinOff()
     {
         winScreen.enabled = false;
     }
@@ -63,8 +63,4 @@ public class UIManager : MonoBehaviour
     {
         BotSelect.enabled = false;
     }
-
-
-
-
 }
