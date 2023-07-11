@@ -260,12 +260,11 @@ public class GameManager : MonoBehaviour
 
     public void BDBOT()
     {
-        Debug.Log("Bot takes turn");
         if (turns < 43)
         {
             botturn = true;
             IsBotTurn = true;
-            GridManager.gridMinst.BotDetection();
+            GridManager.gridMinst.BotDetection(cellType.yellow);
 
         }
         if (turns == 43)
@@ -280,7 +279,6 @@ public class GameManager : MonoBehaviour
     {
         if (botturn)
         {
-            Debug.Log("Bot move allowed");
             botturn = false;
             if (col == 7)
             {
