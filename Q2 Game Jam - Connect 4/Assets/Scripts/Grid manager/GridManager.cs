@@ -7,10 +7,13 @@ public class GridManager : MonoBehaviour
     public Cell cell;
     public Transform gridParent;
 
+    
 
     public int Row;
     public int column;
 
+    //int curRowIndex;
+    //int curColIndex;
     //int coinsToWin = 4;
 
     public static bool movelimit = false;
@@ -33,7 +36,7 @@ public class GridManager : MonoBehaviour
             for (int j = 0; j < Row; j++)
             {
                 Cell obj = Instantiate(cell, (Vector2)cell.transform.position + _coldiff + _rowdiff, Quaternion.identity, gridParent);
-                _coldiff += new Vector2(0, -1);
+                _coldiff += new Vector2(0, -0.9f);
                 obj.rowIndex = j;
                 obj.colIndex = i;
                 obj.name = "[" + j + "," + i + "]";
@@ -41,7 +44,7 @@ public class GridManager : MonoBehaviour
 
             }
             _coldiff = new Vector2(0, 0);
-            _rowdiff += new Vector2(1, 0);
+            _rowdiff += new Vector2(0.9f, 0);
 
         }
 
@@ -80,7 +83,7 @@ public class GridManager : MonoBehaviour
                 }
                 else
                 {
-                    GameManager.GMinst.LerpCoin(i-1,SCol, cells[i - 1, SCol], cellT);
+                    GameManager.GMinst.LerpCoin(i - 1, SCol, cells[i - 1, SCol], cellT);
 
                     break;
 
@@ -91,7 +94,7 @@ public class GridManager : MonoBehaviour
             {
                 if (cells[i, SCol].cellType == cellType.none)
                 {
-                    GameManager.GMinst.LerpCoin(i,SCol, cells[i, SCol], cellT);
+                    GameManager.GMinst.LerpCoin(i, SCol, cells[i, SCol], cellT);
 
                     break;
                 }
@@ -107,14 +110,79 @@ public class GridManager : MonoBehaviour
     {
         Debug.Log(currentType + " wins " + direction);
         UIManager.instUIM.WinOn();
-        AudioManager.AM.PlayWinAudio();
         GameManager.GMinst.UpdateWinText(currentType);
     }
+
+    //public void CheckWinV2(int rowIndex, int colIndex, cellType currentType)
+    //{
+    //    bool isConditionTrue = false;
+        
+        
+
+    //    for (int L = 1; L <= 4; L++)
+    //    {
+    //        //Horizontally
+    //        if (L == 1 && cells[rowIndex, colIndex].cellType == currentType)
+    //        {
+    //            curRowIndex = rowIndex;
+    //            curColIndex = colIndex;
+    //            int coinsTocheck = 4;
+    //            for (int i = 1; i <= 4; i++)
+    //            {
+    //                if (colIndex + i < column &&cells[rowIndex, colIndex + i] != null && cells[rowIndex, colIndex + i].cellType == currentType)
+    //                {
+    //                    coinsTocheck -= 1;
+    //                    if (coinsTocheck == 0)
+    //                    {
+    //                        ShowWinner(currentType, "Horizontally");
+            
+    //                    }
+    //                }
+
+    //                else
+    //                {
+    //                    curRowIndex = rowIndex;
+    //                    curColIndex = colIndex + i;
+    //                    isConditionTrue = true;
+    //                    break;
+    //                }
+
+    //                if(coinsTocheck == 0)
+    //                {
+    //                    break;
+    //                }
+    //            }
+    //            if (isConditionTrue)
+    //            {
+    //                coinsTocheck = 4;
+    //                for (int i = 1; i <= 4; i++)
+    //                {
+    //                    if (colIndex - i > -1 && cells[curRowIndex, curColIndex - i] != null && cells[curRowIndex, curColIndex - i].cellType == currentType)
+    //                    {
+    //                        coinsTocheck -= 1;
+    //                        if(coinsTocheck == 0)
+    //                        {
+    //                            ShowWinner(currentType, "horizontally");
+    //                            isConditionTrue = false;
+    //                        }
+    //                    }
+    //                }
+    //            }
+
+    //        }
+
+    //        if (L > 1)
+    //        {
+    //            Debug.Log("checkinf other direction");
+    //        }
+
+    //    }
+    //}
+
 
 
     public void CheckWin(int rowIndex, int colIndex, cellType currentType)
     {
-        //proto method for CheckWin
 
         // 3 Coin match
         //horizontal Forward
@@ -176,13 +244,13 @@ public class GridManager : MonoBehaviour
         }
 
         //Diagonal(Left down - right up : middle Left)
-        if (rowIndex + 1 < Row && rowIndex - 2 > -1 && colIndex + 2 < column && colIndex - 1 > -1 &&  cells[rowIndex, colIndex] != null && cells[rowIndex, colIndex].cellType == currentType && cells[rowIndex -1,colIndex +1] && cells[rowIndex-1,colIndex+1].cellType == currentType && cells[rowIndex - 2, colIndex + 2] && cells[rowIndex - 2, colIndex + 2].cellType == currentType && cells[rowIndex + 1, colIndex - 1] && cells[rowIndex + 1, colIndex - 1].cellType == currentType)
+        if (rowIndex + 1 < Row && rowIndex - 2 > -1 && colIndex + 2 < column && colIndex - 1 > -1 && cells[rowIndex, colIndex] != null && cells[rowIndex, colIndex].cellType == currentType && cells[rowIndex - 1, colIndex + 1] && cells[rowIndex - 1, colIndex + 1].cellType == currentType && cells[rowIndex - 2, colIndex + 2] && cells[rowIndex - 2, colIndex + 2].cellType == currentType && cells[rowIndex + 1, colIndex - 1] && cells[rowIndex + 1, colIndex - 1].cellType == currentType)
         {
             ShowWinner(currentType, "Diagonal(Left down - right up : middle Left)");
         }
 
         //Diagonal(left down - right up : middle right)
-        if (rowIndex + 2 < Row && rowIndex - 1 > -1 && colIndex - 2 > -1 && colIndex + 1 < column && cells[rowIndex, colIndex] != null && cells[rowIndex, colIndex].cellType == currentType && cells[rowIndex -1,colIndex +1] != null && cells[rowIndex -1,colIndex +1].cellType == currentType && cells[rowIndex + 1, colIndex - 1] != null && cells[rowIndex + 1, colIndex - 1].cellType == currentType && cells[rowIndex + 2, colIndex - 2] != null && cells[rowIndex + 2, colIndex - 2].cellType == currentType)
+        if (rowIndex + 2 < Row && rowIndex - 1 > -1 && colIndex - 2 > -1 && colIndex + 1 < column && cells[rowIndex, colIndex] != null && cells[rowIndex, colIndex].cellType == currentType && cells[rowIndex - 1, colIndex + 1] != null && cells[rowIndex - 1, colIndex + 1].cellType == currentType && cells[rowIndex + 1, colIndex - 1] != null && cells[rowIndex + 1, colIndex - 1].cellType == currentType && cells[rowIndex + 2, colIndex - 2] != null && cells[rowIndex + 2, colIndex - 2].cellType == currentType)
         {
             ShowWinner(currentType, "Diagonal(left down - right up : middle right)");
         }
@@ -280,7 +348,7 @@ public class GridManager : MonoBehaviour
 
                     }
 
-                   
+
 
 
 
@@ -334,7 +402,7 @@ public class GridManager : MonoBehaviour
 
                     // For Middle Detection (2-1-1)
                     // Horizontal Forward
-                    if(col + 3 < column && cells[row, col + 1] != null && cells[row, col + 1].cellType == cellType.red && cells[row, col + 2] != null && cells[row, col + 2].cellType == cellType.none && cells[row, col + 3] != null && cells[row, col + 3].cellType == cellType.red)
+                    if (col + 3 < column && cells[row, col + 1] != null && cells[row, col + 1].cellType == cellType.red && cells[row, col + 2] != null && cells[row, col + 2].cellType == cellType.none && cells[row, col + 3] != null && cells[row, col + 3].cellType == cellType.red)
                     {
                         DetectionResult(row, col + 2);
                         break;
@@ -346,7 +414,7 @@ public class GridManager : MonoBehaviour
                         break;
                     }
                     //Vertical
-                    if(row - 3 >=0 && cells[row - 1, col] != null && cells[row - 1, col].cellType == cellType.red && cells[row - 2, col] != null && cells[row - 2, col].cellType == cellType.none && cells[row - 3, col] != null && cells[row - 3, col].cellType == cellType.red)
+                    if (row - 3 >= 0 && cells[row - 1, col] != null && cells[row - 1, col].cellType == cellType.red && cells[row - 2, col] != null && cells[row - 2, col].cellType == cellType.none && cells[row - 3, col] != null && cells[row - 3, col].cellType == cellType.red)
                     {
                         DetectionResult(row - 2, col);
                         break;
@@ -361,26 +429,26 @@ public class GridManager : MonoBehaviour
                     }
 
                     //Diagonal(Right up - Left down)
-                    if(row + 3 <Row && col - 3 >= 0 && cells[row + 1, col - 1] != null && cells[row + 1, col - 1].cellType == cellType.red && cells[row + 2, col - 2] != null && cells[row + 2, col - 2].cellType == cellType.none && cells[row + 3, col - 3] != null && cells[row + 3, col - 3].cellType == cellType.red)
+                    if (row + 3 < Row && col - 3 >= 0 && cells[row + 1, col - 1] != null && cells[row + 1, col - 1].cellType == cellType.red && cells[row + 2, col - 2] != null && cells[row + 2, col - 2].cellType == cellType.none && cells[row + 3, col - 3] != null && cells[row + 3, col - 3].cellType == cellType.red)
                     {
                         DetectionResult(row + 2, col - 2);
                         break;
                     }
 
                     //Diagonal(Right down - Left up)
-                    if(row - 3 >= 0 && col - 3 >= 0 && cells[row - 1, col - 1] != null && cells[row - 1, col - 1].cellType == cellType.red && cells[row - 2, col - 2] != null && cells[row - 2, col - 2].cellType == cellType.none && cells[row - 3, col - 3] != null && cells[row - 3, col - 3].cellType == cellType.red)
+                    if (row - 3 >= 0 && col - 3 >= 0 && cells[row - 1, col - 1] != null && cells[row - 1, col - 1].cellType == cellType.red && cells[row - 2, col - 2] != null && cells[row - 2, col - 2].cellType == cellType.none && cells[row - 3, col - 3] != null && cells[row - 3, col - 3].cellType == cellType.red)
                     {
                         DetectionResult(row - 2, col - 2);
                         break;
                     }
 
                     //Diagonal(Left up - Right down)
-                    if(row + 3 < Row && col + 3 < column && cells[row + 1, col + 1] != null && cells[row + 1, col + 1].cellType == cellType.red && cells[row + 2, col + 2] != null && cells[row + 2, col + 2].cellType == cellType.none && cells[row + 3, col + 3] != null && cells[row + 3, col + 3].cellType == cellType.red)
+                    if (row + 3 < Row && col + 3 < column && cells[row + 1, col + 1] != null && cells[row + 1, col + 1].cellType == cellType.red && cells[row + 2, col + 2] != null && cells[row + 2, col + 2].cellType == cellType.none && cells[row + 3, col + 3] != null && cells[row + 3, col + 3].cellType == cellType.red)
                     {
                         DetectionResult(row + 3, col + 3);
                         break;
                     }
-                
+
 
                 }
                 else
@@ -390,7 +458,7 @@ public class GridManager : MonoBehaviour
                         GameManager.GMinst.Botmove(7);
                         break;
                     }
-                    
+
                 }
             }
         }

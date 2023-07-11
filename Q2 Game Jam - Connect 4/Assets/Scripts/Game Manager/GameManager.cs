@@ -321,14 +321,19 @@ public class GameManager : MonoBehaviour
     {
         cellObj.GetComponent<Cell>().ChangeType(CT);
         GridManager.gridMinst.CheckWin(rowIndex,colIndex,CT);
+        //GridManager.gridMinst.CheckWinV2(rowIndex, colIndex, CT);
         Destroy(SC);
         IsGamePlaying = true;
         TurnChange();
 
         if (IsBotTurn)
         {
+            if(HasWon == false)
+            {
             BDBOT();
             IsBotTurn = false;
+
+            }
         }
     }
 

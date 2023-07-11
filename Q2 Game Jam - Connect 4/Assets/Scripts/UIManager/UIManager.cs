@@ -54,6 +54,7 @@ public class UIManager : MonoBehaviour
 
     public void WinOn()
     {
+        AudioManager.AM.PlayWinSound();
         winScreen.enabled = true;
     }
 

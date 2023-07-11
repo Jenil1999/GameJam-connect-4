@@ -5,8 +5,9 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public AudioSource source;
+    public AudioSource BGsource;
+    public AudioClip winsound;
     public static AudioManager AM;
-    public AudioClip winclip;
     public AudioClip resetclip;
 
     private void Awake()
@@ -20,12 +21,11 @@ public class AudioManager : MonoBehaviour
         source.Play();
     }
 
-    public void PlayWinAudio()
+    public void PlayWinSound()
     {
-        source.clip = winclip;
+        source.clip = winsound;
         source.Play();
     }
-
 
     public void PlayResetAudio()
     {
@@ -36,11 +36,13 @@ public class AudioManager : MonoBehaviour
     public void Mute()
     {
         source.mute = true;
+        BGsource.mute = true;
     }
 
     public void Unmute()
     {
         source.mute = false;
+        BGsource.mute = false;
     }
 
 }
