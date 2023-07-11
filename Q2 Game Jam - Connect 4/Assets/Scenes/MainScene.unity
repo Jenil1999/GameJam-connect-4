@@ -2407,6 +2407,7 @@ MonoBehaviour:
   LvlSelect: {fileID: 1342113893}
   BotSelect: {fileID: 512169732}
   winScreen: {fileID: 1468163788}
+  drawScreen: {fileID: 1344073081}
 --- !u!4 &739385590
 Transform:
   m_ObjectHideFlags: 0
