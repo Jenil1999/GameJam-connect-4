@@ -7,7 +7,7 @@ public class GridManager : MonoBehaviour
     public Cell cell;
     public Transform gridParent;
 
-
+    List<int> AvoidMoves = new();
 
     public int Row;
     public int column;
@@ -57,6 +57,7 @@ public class GridManager : MonoBehaviour
         {
             cell.GetComponent<Cell>().ChangeType(cellType.none);
         }
+        //AvoidMoves.Clear();
     }
 
 
@@ -113,71 +114,6 @@ public class GridManager : MonoBehaviour
         GameManager.GMinst.UpdateWinText(currentType);
     }
 
-    //public void CheckWinV2(int rowIndex, int colIndex, cellType currentType)
-    //{
-    //    bool isConditionTrue = false;
-
-
-
-    //    for (int L = 1; L <= 4; L++)
-    //    {
-    //        //Horizontally
-    //        if (L == 1 && cells[rowIndex, colIndex].cellType == currentType)
-    //        {
-    //            curRowIndex = rowIndex;
-    //            curColIndex = colIndex;
-    //            int coinsTocheck = 4;
-    //            for (int i = 1; i <= 4; i++)
-    //            {
-    //                if (colIndex + i < column &&cells[rowIndex, colIndex + i] != null && cells[rowIndex, colIndex + i].cellType == currentType)
-    //                {
-    //                    coinsTocheck -= 1;
-    //                    if (coinsTocheck == 0)
-    //                    {
-    //                        ShowWinner(currentType, "Horizontally");
-
-    //                    }
-    //                }
-
-    //                else
-    //                {
-    //                    curRowIndex = rowIndex;
-    //                    curColIndex = colIndex + i;
-    //                    isConditionTrue = true;
-    //                    break;
-    //                }
-
-    //                if(coinsTocheck == 0)
-    //                {
-    //                    break;
-    //                }
-    //            }
-    //            if (isConditionTrue)
-    //            {
-    //                coinsTocheck = 4;
-    //                for (int i = 1; i <= 4; i++)
-    //                {
-    //                    if (colIndex - i > -1 && cells[curRowIndex, curColIndex - i] != null && cells[curRowIndex, curColIndex - i].cellType == currentType)
-    //                    {
-    //                        coinsTocheck -= 1;
-    //                        if(coinsTocheck == 0)
-    //                        {
-    //                            ShowWinner(currentType, "horizontally");
-    //                            isConditionTrue = false;
-    //                        }
-    //                    }
-    //                }
-    //            }
-
-    //        }
-
-    //        if (L > 1)
-    //        {
-    //            Debug.Log("checkinf other direction");
-    //        }
-
-    //    }
-    //}
 
 
 
@@ -294,17 +230,58 @@ public class GridManager : MonoBehaviour
 
                 else
                 {
+
                     if (currentType == cellType.yellow)
                     {
-                        Debug.Log("Bot win detected but not possible");    
+                        Debug.Log("Bot win detected but not possible");
                     }
-                        
+
                     if (currentType == cellType.red)
                     {
-                    Debug.Log("winning move detected but coin cannot be placed there");
+                        Debug.Log("winning move detected but coin cannot be placed there");
+                        
+                        if (rowMove < 4 && GameManager.IsBotDifHard == true)
+                        {
+
+                            if (cells[rowMove + 1, colMove] != null && cells[rowMove + 1, colMove].cellType == cellType.none)
+                            {
+
+
+                                if (rowMove + 2 < Row && cells[rowMove + 2, colMove] != null)
+                                {
+                                    if (cells[rowMove + 2, colMove].cellType == cellType.red || cells[rowMove + 2, colMove].cellType == cellType.yellow)
+                                    {
+                                        for (int i = 0; i < GameManager.RMoves.Count; i++)
+                                        {
+                                            if (colMove == GameManager.RMoves[i])
+                                            {
+                                                GameManager.RMoves.Remove(colMove);
+                                                Debug.Log("Way 2 : Move removed: " + colMove + " Elements remaining:  " + GameManager.RMoves.Count);
+                                            }
+                                        }
+                                    }
+                                }
+
+
+                            }
+
+                        }
+                        if(rowMove == 4 && GameManager.IsBotDifHard == true)
+                        {
+                            if (cells[rowMove + 1, colMove] != null && cells[rowMove + 1, colMove].cellType == cellType.none)
+                            {
+                                for (int i = 0; i < GameManager.RMoves.Count; i++)
+                                {
+                                    if (colMove == GameManager.RMoves[i])
+                                    {
+                                        GameManager.RMoves.Remove(colMove);
+                                        Debug.Log("Lowest row, Move removed: " + colMove + " Elements remaining:  " + GameManager.RMoves.Count);
+                                    }
+                                }
+                            }
+                        }
+                       
                     }
-                        
-                        
 
                 }
 
@@ -321,172 +298,14 @@ public class GridManager : MonoBehaviour
     }
 
 
-    //public void BotDetection()
-    //{
-    //    for (int col = 0; col <= column - 1; col++)
-    //    {
-    //        for (int row = 0; row <= Row - 1; row++)
-    //        {
-
-    //            if (cells[row, col].cellType == cellType.red)
-    //            {
-    //                // For 3 coin detection
-    //                // Horizontal forward
-    //                if (col + 2 < column && cells[row, col + 1] != null && cells[row, col + 1].cellType == cellType.red && cells[row, col + 2] != null && cells[row, col + 2].cellType == cellType.red)
-    //                {
-    //                    if (col + 3 < column && cells[row, col + 3] != null && cells[row, col + 3].cellType == cellType.none)
-    //                    {
-    //                        //check for 4th cell
-    //                        DetectionResult(row, col + 3);
-    //                        break;
-    //                    }
-
-    //                }
-    //                // Horizontal backward
-    //                if (col - 2 >= 0 && cells[row, col - 1] != null && cells[row, col - 1].cellType == cellType.red && cells[row, col - 2] != null && cells[row, col - 2].cellType == cellType.red)
-    //                {
-    //                    if (col - 3 >= 0 && cells[row, col - 3] != null && cells[row, col - 3].cellType == cellType.none)
-    //                    {
-    //                        //check for 4th cell
-    //                        DetectionResult(row, col - 3);
-    //                        break;
-    //                    }
-
-    //                }
-
-
-    //                //Vertical 
-
-    //                if (row - 2 >= 0 && cells[row - 1, col] != null && cells[row - 1, col].cellType == cellType.red && cells[row - 2, col] != null && cells[row - 2, col].cellType == cellType.red)
-    //                {
-    //                    if (row - 3 >= 0 && cells[row - 3, col] != null && cells[row - 3, col].cellType == cellType.none)
-    //                    {
-
-    //                        DetectionResult(row, col);
-    //                        break;
-    //                    }
-
-    //                }
-
-
-
-
-
-    //                //Diagonal(Left down - Right up)
-
-    //                if (row - 2 >= 0 && col + 2 < column && cells[row - 1, col + 1] != null && cells[row - 1, col + 1].cellType == cellType.red && cells[row - 2, col + 2] != null && cells[row - 2, col + 2].cellType == cellType.red)
-    //                {
-    //                    if (row - 3 >= 0 && col + 3 < column && cells[row - 3, col + 3] != null && cells[row - 3, col + 3].cellType == cellType.none)
-    //                    {
-    //                        DetectionResult(row - 3, col + 3);
-    //                        break;
-    //                    }
-
-    //                }
-
-    //                //Diagonal(Right up - Left down)
-
-    //                if (row + 2 < Row && col - 2 >= 0 && cells[row + 1, col - 1] != null && cells[row + 1, col - 1].cellType == cellType.red && cells[row + 2, col - 2] != null && cells[row + 2, col - 2].cellType == cellType.red)
-    //                {
-    //                    if (row + 3 < Row && col - 3 >= 0 && cells[row + 3, col - 3] != null && cells[row + 3, col - 3].cellType == cellType.none)
-    //                    {
-    //                        DetectionResult(row + 3, col - 3);
-    //                        break;
-    //                    }
-
-    //                }
-
-
-    //                //Diagonal(Right down - Left up)
-
-    //                if (row - 2 >= 0 && col - 2 >= 0 && cells[row - 1, col - 1] != null && cells[row - 1, col - 1].cellType == cellType.red && cells[row - 2, col - 2] != null && cells[row - 2, col - 2].cellType == cellType.red)
-    //                {
-    //                    if (row - 3 >= 0 && col - 3 >= 0 && cells[row - 3, col - 3] != null && cells[row - 3, col - 3].cellType == cellType.none)
-    //                    {
-    //                        DetectionResult(row - 3, col - 3);
-    //                        break;
-    //                    }
-
-    //                }
-
-    //                //Diagonal(Left up - Right down)
-
-    //                if (row + 2 < Row && col + 2 < column && cells[row + 1, col + 1] != null && cells[row + 1, col + 1].cellType == cellType.red && cells[row + 2, col + 2] != null && cells[row + 2, col + 2].cellType == cellType.red)
-    //                {
-    //                    if (row + 3 < Row && col + 3 < column && cells[row + 3, col + 3] != null && cells[row + 3, col + 3].cellType == cellType.none)
-    //                    {
-    //                        DetectionResult(row + 3, col + 3);
-    //                        break;
-    //                    }
-    //                }
-
-    //                // For Middle Detection (2-1-1)
-    //                // Horizontal Forward
-    //                if (col + 3 < column && cells[row, col + 1] != null && cells[row, col + 1].cellType == cellType.red && cells[row, col + 2] != null && cells[row, col + 2].cellType == cellType.none && cells[row, col + 3] != null && cells[row, col + 3].cellType == cellType.red)
-    //                {
-    //                    DetectionResult(row, col + 2);
-    //                    break;
-    //                }
-    //                //Horizontal Backward
-    //                if (col - 3 >= 0 && cells[row, col - 1] != null && cells[row, col - 1].cellType == cellType.red && cells[row, col - 2] != null && cells[row, col - 2].cellType == cellType.none && cells[row, col - 3] != null && cells[row, col - 3].cellType == cellType.red)
-    //                {
-    //                    DetectionResult(row, col - 2);
-    //                    break;
-    //                }
-    //                //Vertical
-    //                if (row - 3 >= 0 && cells[row - 1, col] != null && cells[row - 1, col].cellType == cellType.red && cells[row - 2, col] != null && cells[row - 2, col].cellType == cellType.none && cells[row - 3, col] != null && cells[row - 3, col].cellType == cellType.red)
-    //                {
-    //                    DetectionResult(row - 2, col);
-    //                    break;
-    //                }
-
-
-    //                //Diagonal(Left down - Right up)
-    //                if (row - 3 >= 0 && col + 3 < column && cells[row - 1, col + 1] != null && cells[row - 1, col + 1].cellType == cellType.red && cells[row - 2, col + 2] != null && cells[row - 2, col + 2].cellType == cellType.none && cells[row - 3, col + 3] != null && cells[row - 3, col + 3].cellType == cellType.red)
-    //                {
-    //                    DetectionResult(row - 2, col + 2);
-    //                    break;
-    //                }
-
-    //                //Diagonal(Right up - Left down)
-    //                if (row + 3 < Row && col - 3 >= 0 && cells[row + 1, col - 1] != null && cells[row + 1, col - 1].cellType == cellType.red && cells[row + 2, col - 2] != null && cells[row + 2, col - 2].cellType == cellType.none && cells[row + 3, col - 3] != null && cells[row + 3, col - 3].cellType == cellType.red)
-    //                {
-    //                    DetectionResult(row + 2, col - 2);
-    //                    break;
-    //                }
-
-    //                //Diagonal(Right down - Left up)
-    //                if (row - 3 >= 0 && col - 3 >= 0 && cells[row - 1, col - 1] != null && cells[row - 1, col - 1].cellType == cellType.red && cells[row - 2, col - 2] != null && cells[row - 2, col - 2].cellType == cellType.none && cells[row - 3, col - 3] != null && cells[row - 3, col - 3].cellType == cellType.red)
-    //                {
-    //                    DetectionResult(row - 2, col - 2);
-    //                    break;
-    //                }
-
-    //                //Diagonal(Left up - Right down)
-    //                if (row + 3 < Row && col + 3 < column && cells[row + 1, col + 1] != null && cells[row + 1, col + 1].cellType == cellType.red && cells[row + 2, col + 2] != null && cells[row + 2, col + 2].cellType == cellType.none && cells[row + 3, col + 3] != null && cells[row + 3, col + 3].cellType == cellType.red)
-    //                {
-    //                    DetectionResult(row + 2, col + 2);
-    //                    break;
-    //                }
-
-
-    //            }
-    //            else
-    //            {
-    //                if (col == 6)
-    //                {
-    //                    GameManager.GMinst.Botmove(7);
-    //                    break;
-    //                }
-
-    //            }
-    //        }
-    //    }
-    //}
-
-
     public void BotDetection(cellType CurrentType)
     {
+        //if (AvoidMoves.Count != 0)
+        //{
+        //    AvoidMoves.Clear();
+
+        //}
+
         for (int col = 0; col <= column - 1; col++)
         {
             for (int row = 0; row <= Row - 1; row++)

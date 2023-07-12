@@ -17,8 +17,11 @@ public class GameManager : MonoBehaviour
     bool IsPlayerBOT = false;
     bool HasWon = false;
 
+    public static bool IsBotDifHard = false;
     public static bool IsBotTurn = false;
     bool botturn = true;
+
+    public static List<int> RMoves;
 
     public AudioClip coinDropSound;
 
@@ -27,6 +30,7 @@ public class GameManager : MonoBehaviour
     public Color Bottext;
     public Color P1text;
     public Color P2text;
+
 
     //List<Cell> cells = new List<Cell>();
 
@@ -44,7 +48,8 @@ public class GameManager : MonoBehaviour
     GameObject SC;
     cellType CT;
     Cell cellObj;
-    float desiredDuration = 0.5f;
+    [Range(0.5f, 1.5f)]
+    public float desiredDuration = 0.5f;
     public GameObject coinPFB;
 
     Player currentPlayer;
@@ -59,7 +64,7 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
-
+        RMoves = new List<int> { 0, 1, 2, 3, 4, 5, 6 };
         p1Pointer.enabled = false;
         p2Pointer.enabled = false;
         pBotPointer.enabled = false;
@@ -71,6 +76,7 @@ public class GameManager : MonoBehaviour
         turns++;
         p1Pointer.enabled = true;
         HasWon = false;
+        RMoves = new List<int> { 0, 1, 2, 3, 4, 5, 6 };
 
         turnText.text = "Player 1 's turn";
         turnText.color = P1text;
@@ -86,6 +92,7 @@ public class GameManager : MonoBehaviour
         turns++;
         p1Pointer.enabled = true;
         HasWon = false;
+        RMoves = new List<int> { 0, 1, 2, 3, 4, 5, 6 };
 
         turnText.text = "Player's turn";
         turnText.color = P1text;
@@ -110,6 +117,7 @@ public class GameManager : MonoBehaviour
         turns = 2;
         turnText.text = "Player's turn";
         turnText.color = P1text;
+        RMoves = new List<int> { 0, 1, 2, 3, 4, 5, 6 };
 
         p1Pointer.enabled = true;
         p2Pointer.enabled = false;
@@ -124,7 +132,7 @@ public class GameManager : MonoBehaviour
             HasWon = true;
             if (cellType == cellType.red)
             {
-                winText.text = "Player 1 ";
+                winText.text = "Player 1 Wins !!";
                 winText.color = P1text;
             }
 
@@ -132,12 +140,12 @@ public class GameManager : MonoBehaviour
             {
                 if (IsPlayerBOT)
                 {
-                    winText.text = "BOT";
+                    winText.text = "BOT Wins !!";
                     winText.color = Bottext;
                 }
                 else
                 {
-                    winText.text = "Player 2";
+                    winText.text = "Player 2 Wins !!";
                     winText.color = P2text;
                 }
             }
@@ -224,11 +232,6 @@ public class GameManager : MonoBehaviour
                             Callplayer(Plyenum.playerBOT);
                             turns++;
                         }
-
-                    }
-                    else
-                    {
-
                     }
                 }
                 else
@@ -247,11 +250,6 @@ public class GameManager : MonoBehaviour
                         }
 
                     }
-                    else
-                    {
-
-                    }
-
                 }
             }
         }
@@ -264,9 +262,17 @@ public class GameManager : MonoBehaviour
         {
             botturn = true;
             IsBotTurn = true;
-            GridManager.gridMinst.BotDetection(cellType.yellow);
-
+            if (IsBotDifHard)
+            {
+                GridManager.gridMinst.BotDetection(cellType.yellow);
+            }
+            else
+            {
+                GridManager.gridMinst.BotDetection(cellType.red);
+            }
         }
+
+
         if (turns == 43)
         {
             UIManager.instUIM.DrawScreenOn();
@@ -279,23 +285,52 @@ public class GameManager : MonoBehaviour
     {
         if (botturn)
         {
-            botturn = false;
             if (col == 7)
             {
-                Debug.Log("No Detection, Random move");
-                int c = Random.Range(0, 7);
-                GridManager.gridMinst.Checkcolume(c, cellType.yellow);
+                if (IsBotDifHard)
+                {
+                    if (turns < 9)
+                    {
+                        Debug.Log("No Detection, Random move");
+                        int t = Random.Range(2, 5);
+
+                        GridManager.gridMinst.Checkcolume(RMoves[t], cellType.yellow);
+                        botturn = false;
+                    }
+                    else
+                    {
+                        Debug.Log("No Detection, Random move");
+                        int c = Random.Range(0, RMoves.Count);
+
+                        GridManager.gridMinst.Checkcolume(RMoves[c], cellType.yellow);
+                        botturn = false;
+                    }
+
+                }
+                else
+                {
+                    Debug.Log("No Detection, Random move");
+                    int c = Random.Range(0, RMoves.Count);
+
+                    GridManager.gridMinst.Checkcolume(RMoves[c], cellType.yellow);
+                    botturn = false;
+
+                }
+
             }
+
             else
             {
                 GridManager.gridMinst.Checkcolume(col, cellType.yellow);
+                botturn = false;
+
             }
 
         }
 
     }
 
-    public void LerpCoin(int row,int col, Cell obj, cellType ct)
+    public void LerpCoin(int row, int col, Cell obj, cellType ct)
     {
         IsGamePlaying = false;
         CT = ct;
@@ -318,7 +353,7 @@ public class GameManager : MonoBehaviour
     public void OndropCompelete()
     {
         cellObj.GetComponent<Cell>().ChangeType(CT);
-        GridManager.gridMinst.CheckWin(rowIndex,colIndex,CT);
+        GridManager.gridMinst.CheckWin(rowIndex, colIndex, CT);
         //GridManager.gridMinst.CheckWinV2(rowIndex, colIndex, CT);
         Destroy(SC);
         IsGamePlaying = true;
@@ -326,10 +361,10 @@ public class GameManager : MonoBehaviour
 
         if (IsBotTurn)
         {
-            if(HasWon == false)
+            if (HasWon == false)
             {
-            BDBOT();
-            IsBotTurn = false;
+                BDBOT();
+                IsBotTurn = false;
 
             }
         }
@@ -353,7 +388,7 @@ public class GameManager : MonoBehaviour
                         {
                             int c = hit.collider.GetComponent<Cell>().colIndex;  //hit.collider.GetComponent<Column>().colNUm;
                             GridManager.gridMinst.Checkcolume(c, cellType.red);
-                            
+
                         }
                         else
                         {
@@ -391,12 +426,12 @@ public class GameManager : MonoBehaviour
                             if (turns % 2 == 0)
                             {
                                 GridManager.gridMinst.Checkcolume(c, cellType.red);
-                               
+
                             }
                             else
                             {
                                 GridManager.gridMinst.Checkcolume(c, cellType.yellow);
-                                
+
                             }
 
                         }

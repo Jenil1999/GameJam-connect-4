@@ -15,27 +15,67 @@ public class Homescreen : UIScreen
     public Transform ShopBTNPos;
     public GameObject MuteBTN;
     public Transform MuteBTNPos;
+    public Transform MuteBTNstartPos;
     public GameObject UnMuteBTN;
     public GameObject Logo;
+    public Transform LogostartPos;
     public Transform LogoPos;
     public GameObject PvBBTN;
+    public Transform PvBBTNstartPos;
     public Transform PvBBTNPos;
     public GameObject PvPBTN;
+    public Transform PvPBTNstartPos;
     public Transform PvPBTNPos;
 
     private void Start()
     {
         MuteBTN.transform.DOMove(MuteBTNPos.position, _animeDur - 0.5f);
+        UnMuteBTN.transform.DOMove(MuteBTNPos.position, _animeDur - 0.5f);
         ShopBTN.transform.DOMove(ShopBTNPos.position, _animeDur - 0.5f);
-        Logo.transform.DOMove(LogoPos.position, _animeDur + 0.2f).SetEase(Ease.OutBounce).OnComplete(() => StartIdle());
+        Logo.transform.DOMove(LogoPos.position/*new Vector2(Logo.transform.position.x, Logo.transform.position.y - 1139)*/, _animeDur + 0.2f).SetEase(Ease.OutBounce).OnComplete(() => StartIdle());
         PvBBTN.transform.DOMove(PvBBTNPos.position, _animeDur - 0.2f);
         PvPBTN.transform.DOMove(PvPBTNPos.position, _animeDur - 0.2f);
     }
 
+    public void AnimOnStart()
+    {
+        MuteBTN.transform.position = new Vector2(MuteBTNstartPos.position.x, MuteBTNstartPos.position.y); ;
+        UnMuteBTN.transform.position = new Vector2(MuteBTNstartPos.position.x, MuteBTNstartPos.position.y);
+        PvBBTN.transform.position = new Vector2(PvBBTNstartPos.position.x, PvBBTNstartPos.position.y);
+        PvPBTN.transform.position = new Vector2(PvPBTNstartPos.position.x, PvPBTNstartPos.position.y);
+        MuteBTN.transform.DOMove(MuteBTNPos.position, _animeDur - 0.9f);
+        UnMuteBTN.transform.DOMove(MuteBTNPos.position, _animeDur - 0.9f);
+        ShopBTN.transform.DOMove(ShopBTNPos.position, _animeDur - 0.5f);
+        PvBBTN.transform.DOMove(PvBBTNPos.position, _animeDur - 0.5f);
+        PvPBTN.transform.DOMove(PvPBTNPos.position, _animeDur - 0.5f);
+    }
+
+    public void AnimOnExitBotgame()
+    {
+        MuteBTN.transform.DOMove(MuteBTNstartPos.position, _animeDur - 0.9f);
+        UnMuteBTN.transform.DOMove(MuteBTNPos.position, _animeDur - 0.9f);
+        PvBBTN.transform.DOMove(PvBBTNstartPos.position, _animeDur - 0.5f).OnComplete(() => BotGame()); 
+        PvPBTN.transform.DOMove(PvPBTNstartPos.position, _animeDur - 0.5f);
+    }
+    public void AnimOnExitHardBotgame()
+    {
+        MuteBTN.transform.DOMove(MuteBTNstartPos.position, _animeDur - 0.9f);
+        UnMuteBTN.transform.DOMove(MuteBTNPos.position, _animeDur - 0.9f);
+        PvBBTN.transform.DOMove(PvBBTNstartPos.position, _animeDur - 0.5f).OnComplete(() => HardBotGame());
+        PvPBTN.transform.DOMove(PvPBTNstartPos.position, _animeDur - 0.5f);
+    }
+    public void AnimOnExitPvPgame()
+    {
+        MuteBTN.transform.DOMove(MuteBTNstartPos.position, _animeDur - 0.9f);
+        UnMuteBTN.transform.DOMove(MuteBTNPos.position, _animeDur - 0.9f);
+        PvBBTN.transform.DOMove(PvBBTNstartPos.position, _animeDur - 0.2f).OnComplete(() => PvPGame());
+        PvPBTN.transform.DOMove(PvPBTNstartPos.position, _animeDur - 0.2f);
+    }
+
+
     public void StartIdle()
     {
-        Logo.transform.DOMove(new Vector3(LogoPos.position.x, LogoPos.position.y - 30, LogoPos.position.z), 0.8f).SetLoops(-1, loopType: LoopType.Yoyo).OnComplete(() => StartIdle());
-  
+        Logo.transform.DOMove(new Vector3(Logo.transform.position.x, Logo.transform.position.y - 30, Logo.transform.position.z), 0.8f).SetLoops(-1, loopType: LoopType.Yoyo).OnComplete(() => StartIdle());
     }
 
     public void ShopOpen()
@@ -57,7 +97,16 @@ public class Homescreen : UIScreen
 
     public void HardBotGame()
     {
-        Debug.Log("Hard mode Soon ");
+        //Debug.Log("Hard mode Soon ");
+        UIManager.instUIM.SwitchScreen(ScreenType.Gameplay);
+        P2.SetActive(false);
+        Pbot.SetActive(true);
+        UIManager.instUIM.LevelSelectorOff();
+        UIManager.instUIM.BotSelectorOff();
+        GameManager.GMinst.Gamebotstart();
+        GridManager.gridMinst.Reset();
+        PvPBTN.SetActive(true);
+        GameManager.IsBotDifHard = true;
     }
 
 
