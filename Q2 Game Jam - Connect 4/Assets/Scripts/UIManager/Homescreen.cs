@@ -75,7 +75,7 @@ public class Homescreen : UIScreen
 
     public void StartIdle()
     {
-        Logo.transform.DOMove(new Vector3(Logo.transform.position.x, Logo.transform.position.y - 30, Logo.transform.position.z), 0.8f).SetLoops(-1, loopType: LoopType.Yoyo).OnComplete(() => StartIdle());
+        Logo.transform.DOMove(new Vector3(Logo.transform.position.x, Logo.transform.position.y - /*30*/ 1, Logo.transform.position.z), 0.8f).SetLoops(-1, loopType: LoopType.Yoyo).OnComplete(() => StartIdle());
     }
 
     public void ShopOpen()
@@ -90,7 +90,7 @@ public class Homescreen : UIScreen
         Pbot.SetActive(true);
         UIManager.instUIM.LevelSelectorOff();
         UIManager.instUIM.BotSelectorOff();
-        GameManager.GMinst.Gamebotstart();
+        GameManager.instance.Gamebotstart();
         GridManager.gridMinst.Reset();
         PvPBTN.SetActive(true);
     }
@@ -103,7 +103,7 @@ public class Homescreen : UIScreen
         Pbot.SetActive(true);
         UIManager.instUIM.LevelSelectorOff();
         UIManager.instUIM.BotSelectorOff();
-        GameManager.GMinst.Gamebotstart();
+        GameManager.instance.Gamebotstart();
         GridManager.gridMinst.Reset();
         PvPBTN.SetActive(true);
         GameManager.IsBotDifHard = true;
@@ -117,7 +117,7 @@ public class Homescreen : UIScreen
         Pbot.SetActive(false);
         UIManager.instUIM.LevelSelectorOff();
         UIManager.instUIM.BotSelectorOff();
-        GameManager.GMinst.Gamestart();
+        GameManager.instance.Gamestart();
         GridManager.gridMinst.Reset();
     }
 

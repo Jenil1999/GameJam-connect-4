@@ -8,7 +8,7 @@ public class Gameplay : UIScreen
     public void CloseBTN()
     {
         UIManager.instUIM.SwitchScreen(ScreenType.HomeScreen);
-        GameManager.GMinst.Gameend();
+        GameManager.instance.Gameend();
         UIManager.instUIM.WinOff();
         GameManager.IsBotDifHard = false;
 
@@ -20,7 +20,7 @@ public class Gameplay : UIScreen
         UIManager.instUIM.WinOff();
         UIManager.instUIM.DrawScreenOff();
         GridManager.gridMinst.Reset();
-        GameManager.GMinst.Reset();
+        GameManager.instance.Reset();
     }
 
 

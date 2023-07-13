@@ -4393,11 +4393,12 @@ MonoBehaviour:
   - {fileID: 1877682259}
   - {fileID: 218268535}
   - {fileID: 2046013632}
-  coinDropSound: {fileID: 8300000, guid: a5a18427befb54a56978c56daeb8ba92, type: 3}
+  coinDropSound: {fileID: 8300000, guid: ebdb45d4f82ac4d8a83a19ef9d8824f6, type: 3}
   turnText: {fileID: 371930644}
   Bottext: {r: 0, g: 0.99215686, b: 0.92156863, a: 1}
   P1text: {r: 0.99215686, g: 0, b: 0, a: 1}
   P2text: {r: 0.99215686, g: 1, b: 0, a: 1}
+  _ps: {fileID: 1302018346}
   coin1: {fileID: 1404059696981651361, guid: cb00a2a90b6d6429484441c4f4b6c21d, type: 3}
   coin2: {fileID: 2752682418100749561, guid: 3962a3ecc0809447196a09c98a98dc12, type: 3}
   layer:
@@ -4750,6 +4751,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1296348142}
   m_CullTransparentMesh: 1
+--- !u!198 &1302018346 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4365139440747158886, guid: 53c7186d223ba47eb8947cab4fb2adec, type: 3}
+  m_PrefabInstance: {fileID: 1417818890}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1342113889
 GameObject:
   m_ObjectHideFlags: 0
@@ -5021,6 +5027,7 @@ MonoBehaviour:
   BGsource: {fileID: 1416159211}
   winsound: {fileID: 8300000, guid: 90ad1581771fc44b6802c2f7b0854a73, type: 3}
   resetclip: {fileID: 8300000, guid: 7e3891a6f4233461e9d1283bc99fd747, type: 3}
+  losesound: {fileID: 8300000, guid: 97a5ef9e3bca0442dba9e0d3d6262713, type: 3}
 --- !u!4 &1416159210
 Transform:
   m_ObjectHideFlags: 0
@@ -6051,7 +6058,7 @@ Canvas:
   m_GameObject: {fileID: 1573315152}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0

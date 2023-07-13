@@ -9,6 +9,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip winsound;
     public static AudioManager AM;
     public AudioClip resetclip;
+    public AudioClip losesound;
 
     private void Awake()
     {
@@ -24,6 +25,12 @@ public class AudioManager : MonoBehaviour
     public void PlayWinSound()
     {
         source.clip = winsound;
+        source.Play();
+    }
+
+    public void PlayLoseSound()
+    {
+        source.clip = losesound;
         source.Play();
     }
 

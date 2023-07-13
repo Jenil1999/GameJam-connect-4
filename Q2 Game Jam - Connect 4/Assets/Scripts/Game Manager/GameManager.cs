@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     public Color P1text;
     public Color P2text;
 
+    public ParticleSystem _ps;
 
     //List<Cell> cells = new List<Cell>();
 
@@ -55,11 +56,12 @@ public class GameManager : MonoBehaviour
     Player currentPlayer;
 
 
-    public static GameManager GMinst;
+    public static GameManager instance;
 
     private void Awake()
     {
-        GMinst = this;
+        instance = this;
+        _ps.Stop();
     }
 
     public void Start()
@@ -108,6 +110,8 @@ public class GameManager : MonoBehaviour
         IsPlayerBOT = false;
         IsBotTurn = false;
         turns = 1;
+
+        _ps.Stop();
     }
 
     public void Reset()
@@ -122,7 +126,11 @@ public class GameManager : MonoBehaviour
         p1Pointer.enabled = true;
         p2Pointer.enabled = false;
         pBotPointer.enabled = false;
+
+        _ps.Stop();
     }
+
+
 
     public void UpdateWinText(cellType cellType)
     {
@@ -132,6 +140,8 @@ public class GameManager : MonoBehaviour
             HasWon = true;
             if (cellType == cellType.red)
             {
+                AudioManager.AM.PlayWinSound();
+                _ps.Play();
                 winText.text = "Player 1 Wins !!";
                 winText.color = P1text;
             }
@@ -140,11 +150,14 @@ public class GameManager : MonoBehaviour
             {
                 if (IsPlayerBOT)
                 {
+                    AudioManager.AM.PlayLoseSound();
                     winText.text = "BOT Wins !!";
                     winText.color = Bottext;
                 }
                 else
                 {
+                    AudioManager.AM.PlayWinSound();
+                    _ps.Play();
                     winText.text = "Player 2 Wins !!";
                     winText.color = P2text;
                 }
@@ -283,50 +296,39 @@ public class GameManager : MonoBehaviour
 
     public void Botmove(int col)
     {
+        Debug.Log("Current column: "+col);
         if (botturn)
         {
             if (col == 7)
             {
-                if (IsBotDifHard)
-                {
-                    if (turns < 9)
-                    {
-                        Debug.Log("No Detection, Random move");
-                        int t = Random.Range(2, 5);
 
-                        GridManager.gridMinst.Checkcolume(RMoves[t], cellType.yellow);
-                        botturn = false;
-                    }
-                    else
-                    {
-                        Debug.Log("No Detection, Random move");
-                        int c = Random.Range(0, RMoves.Count);
-
-                        GridManager.gridMinst.Checkcolume(RMoves[c], cellType.yellow);
-                        botturn = false;
-                    }
-
-                }
-                else
-                {
-                    Debug.Log("No Detection, Random move");
-                    int c = Random.Range(0, RMoves.Count);
-
-                    GridManager.gridMinst.Checkcolume(RMoves[c], cellType.yellow);
-                    botturn = false;
-
-                }
+                Debug.Log("No Detection, Random move");
+                int c = Random.Range(0, RMoves.Count);
+                //StartCoroutine(BotThinking(RMoves[c], cellType.yellow));
+                 GridManager.gridMinst.Checkcolume(RMoves[c], cellType.yellow);
+                botturn = false;
 
             }
 
             else
             {
+               // StartCoroutine(BotThinking(col, cellType.yellow));
                 GridManager.gridMinst.Checkcolume(col, cellType.yellow);
                 botturn = false;
 
             }
 
         }
+
+    }
+
+    IEnumerator BotThinking(int col, cellType currenttype)
+    {
+        //IsGamePlaying = false;
+        float thinkingTime = Random.Range(0.2f, 1f);
+        yield return new WaitForSeconds(thinkingTime);
+        GridManager.gridMinst.Checkcolume(col, currenttype);
+
 
     }
 
@@ -501,6 +503,7 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
 
 
 
